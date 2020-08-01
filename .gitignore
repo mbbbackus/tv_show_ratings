@@ -1,2 +1,4 @@
 .DS_Store
 /data
+tv_ratings_website/db.sqlite3
+tv_ratings_website/tv_ratings_website/__pycache__/
