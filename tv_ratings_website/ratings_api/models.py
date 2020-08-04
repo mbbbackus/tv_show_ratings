@@ -5,8 +5,8 @@ class Series(models.Model):
 	id = models.CharField(max_length=9, primary_key=True, editable=False)
 	primary_title = models.CharField(max_length=200)
 	original_title = models.CharField(max_length=200)
-	start_year = models.IntegerField(default=1775)
-	end_year = models.IntegerField(default=2175) #debugging purposes
+	start_year = models.IntegerField(default=-1)
+	end_year = models.IntegerField(default=-1) #debugging purposes
 
 class Episode(models.Model):
 	id = models.CharField(max_length=9, primary_key=True, editable=False)
