@@ -3,14 +3,18 @@ from .models import Series, Episode, EpisodeName, EpisodeRating
 
 
 class EpisodeRatingSerializer(serializers.ModelSerializer):
+	average_rating = serializers.FloatField(read_only=True)
+	num_votes = serializers.IntegerField(read_only=True)
 	class Meta:
 		model = EpisodeRating
 		fields = (
 			'average_rating',
-			'num_votes'
+			'num_votes',
 		)
 
 class EpisodeNameSerializer(serializers.ModelSerializer):
+	primary_name = serializers.CharField(read_only=True)
+	original_name = serializers.CharField(read_only=True)
 	class Meta:
 		model = Episode
 		fields = (
@@ -26,12 +30,10 @@ class EpisodeSerializer(serializers.ModelSerializer):
 		model = Episode
 		fields = (
 			'id', 
-			'primary_title', 
-			'original_title', 
-			'start_year', 
-			'end_year'
+			'season_number',
+			'episode_number',
 			'names',
-			'ratings'
+			'ratings',
 		)
 
 class SeriesSerializer(serializers.ModelSerializer):
@@ -45,7 +47,19 @@ class SeriesSerializer(serializers.ModelSerializer):
 			'original_title', 
 			'start_year', 
 			'end_year',
-			'episodes'
+			'episodes',
+		)
+
+class SeriesSearchSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Series
+		fields = (
+			'id', 
+			'primary_title', 
+			'original_title', 
+			'start_year', 
+			'end_year',
 		)
 
 
