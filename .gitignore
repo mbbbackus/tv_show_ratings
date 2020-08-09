@@ -5,3 +5,4 @@ tv_ratings_website/tv_ratings_website/__pycache__/
 tv_ratings_website/ratings_api/__pycache__/
 tv_ratings_website/ratings_api/migrations/__pycache__/
 tv_ratings_website/db.sqlite3
+tv_ratings_website/node_modules/
