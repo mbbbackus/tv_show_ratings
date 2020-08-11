@@ -30,7 +30,11 @@ class SearchBar extends Component {
     if (this.state.series_found) {
       series_found = this.state.series_found.map(series => (
       	<div>
-      		<p>{series.original_title} </p>
+      		<p>
+      			<a href={"/series/"+series.id}>
+      				{series.original_title}
+      			</a>
+      		</p>
       	</div>
       ));
     }
