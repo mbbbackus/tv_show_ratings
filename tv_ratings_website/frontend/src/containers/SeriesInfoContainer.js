@@ -22,7 +22,7 @@ class SeriesInfoContainer extends Component {
         average_rating: (episode.ratings.length > 0 ? episode.ratings[0].average_rating : -1),
         num_votes: (episode.ratings.length > 0 ? episode.ratings[0].num_votes : -1),
         name: (episode.names.length > 0 ? episode.names[0].primary_name : -1),
-        id: episode.id
+        id: episode.id,
       }
     ));
     function compare(a, b) {
