@@ -10,9 +10,21 @@ class SeriesInfoContainer extends Component {
         episodes: []
       }
     };
-    this.sortSeriesInfo = this.sortSeriesInfo.bind(this);
+    this.cleanSeriesInfo = this.cleanSeriesInfo.bind(this);
   }
-  sortSeriesInfo(info) {
+  cleanSeriesInfo(info) {
+    let sortedInfo = info;
+    console.log(sortedInfo);
+    sortedInfo.episodes = info.episodes.map(episode => (
+      {
+        episode_number: episode.episode_number,
+        season_number: episode.season_number,
+        average_rating: (episode.ratings.length > 0 ? episode.ratings[0].average_rating : -1),
+        num_votes: (episode.ratings.length > 0 ? episode.ratings[0].num_votes : -1),
+        name: (episode.names.length > 0 ? episode.names[0].primary_name : -1),
+        id: episode.id
+      }
+    ));
     function compare(a, b) {
       let aSeason = a.season_number;
       let bSeason = b.season_number;
@@ -24,17 +36,16 @@ class SeriesInfoContainer extends Component {
       if (aEpiNum < bEpiNum) return -1;
       return 0;
     }
-    let sortedEpisodes = [...info.episodes];
-    sortedEpisodes.sort(compare);
-    let sortedInfo = info;
-    sortedInfo.episodes = sortedEpisodes;
+    // let sortedEpisodes = [...info.episodes];
+    sortedInfo.episodes.sort(compare);
+    // sortedInfo.episodes = sortedEpisodes;
 
     return sortedInfo;
   }
   loadSeries = () => {
     const series_uuid = this.props.match.params.seriesId;
     axios.get("http://localhost:8000/api/series/" + series_uuid)
-      .then(res => this.setState({ info: this.sortSeriesInfo(res.data) }))
+      .then(res => this.setState({ info: this.cleanSeriesInfo(res.data) }))
       .catch(err => console.log(err));
   }
   componentDidMount() {

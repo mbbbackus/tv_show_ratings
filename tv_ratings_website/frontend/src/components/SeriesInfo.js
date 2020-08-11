@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { LineChart, Line } from 'recharts';
 
 class SeriesInfo extends Component {
   constructor(props) {
@@ -11,9 +12,9 @@ class SeriesInfo extends Component {
       return;
     return this.props.info.episodes.map(episode => (
       <div>
-        <p>{episode.names[0].primary_name}</p>
-        <p>{episode.ratings.length === 0 ? "no rating" : episode.ratings[0].average_rating}</p>
-        <p>{episode.ratings.length === 0 ? "no votes" : episode.ratings[0].num_votes}</p>
+        <p>{episode.name}</p>
+        <p>{episode.average_rating}</p>
+        <p>{episode.num_votes}</p>
       </div>
     ));
   }
@@ -21,6 +22,11 @@ class SeriesInfo extends Component {
     return (
       <div className="series-info">
         <h1>{this.props.info.primary_title}</h1>
+        <div>
+          <LineChart width={800} height={400} data={this.props.info.episodes}>
+            <Line type="monotone" dataKey="average_rating" stroke="#8884d8" />
+          </LineChart>
+        </div>
         <div>
           {this.renderEpisodes()}
         </div>
