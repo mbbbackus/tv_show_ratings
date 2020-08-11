@@ -1,41 +1,22 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 class SearchBar extends Component {
-  state = {
-    series_found: null,
-    loading: false,
-    value: ''
-  };
+  constructor(props) {
+    super(props);
+    this.renderSeriesFound = this.renderSeriesFound.bind(this);
+  }
 
-  search = val => {
-    this.setState({ loading: true });
-    axios.get(
-     	`http://localhost:8000/api/series_by_original_title/?search=${val}`
-    ).then(res => this.setState(
-    	{
-    		series_found: res.data, 
-    		loading: false 
-    	}
-    )).catch(err => console.log(err));
-  };
-
-  onChangeHandler = async e => {
-    this.search(e.target.value);
-    this.setState({ value: e.target.value });
-  };
-
-  get renderSeriesFound() {
+  renderSeriesFound() {
     let series_found = <h1>There are no series found</h1>;
-    if (this.state.series_found) {
-      series_found = this.state.series_found.map(series => (
-      	<div>
-      		<p>
-      			<a href={"/series/"+series.id}>
-      				{series.original_title}
-      			</a>
-      		</p>
-      	</div>
+    if (this.props.seriesFound) {
+      series_found = this.props.seriesFound.map(series => (
+        <div>
+          <p>
+            <a href={"/series/"+series.id}>
+              {series.original_title}
+            </a>
+          </p>
+        </div>
       ));
     }
 
@@ -46,11 +27,11 @@ class SearchBar extends Component {
     return (
       <div>
         <input
-          value={this.state.value}
-          onChange={e => this.onChangeHandler(e)}
+          value={this.props.inputValue}
+          onChange={e => this.props.onChangeHandler(e)}
           placeholder="Type something to search"
         />
-        {this.renderSeriesFound}
+        {this.renderSeriesFound()}
       </div>
     );
   }

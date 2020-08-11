@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
-import SeriesInfo from './components/SeriesInfo';
-import SearchBar from './components/SearchBar';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import SeriesInfoContainer from './containers/SeriesInfoContainer';
+import SearchBarContainer from './containers/SearchBarContainer';
 import './App.css';
 
 function App() {
   return (
     <main className="App">
       <Router>
-        <Route path="/search/" component={SearchBar} />
-        <Route path="/series/:seriesId" component={SeriesInfo} />
+        <Route path="/search/" component={SearchBarContainer} />
+        <Route path="/series/:seriesId" component={SeriesInfoContainer} />
       </Router>
     </main>
   );
