@@ -13,8 +13,21 @@ class SeriesInfoContainer extends Component {
     this.sortSeriesInfo = this.sortSeriesInfo.bind(this);
   }
   sortSeriesInfo(info) {
-    let sortedInfo = [];
-    let seasons = [];
+    function compare(a, b) {
+      let aSeason = a.season_number;
+      let bSeason = b.season_number;
+      if (aSeason > bSeason) return 1;
+      if (aSeason < bSeason) return -1;
+      let aEpiNum = a.episode_number;
+      let bEpiNum = b.episode_number;
+      if (aEpiNum > bEpiNum) return 1;
+      if (aEpiNum < bEpiNum) return -1;
+      return 0;
+    }
+    let sortedEpisodes = [...info.episodes];
+    sortedEpisodes.sort(compare);
+    let sortedInfo = info;
+    sortedInfo.episodes = sortedEpisodes;
 
     return sortedInfo;
   }
