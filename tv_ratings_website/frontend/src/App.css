@@ -1,0 +1,13 @@
+.random-container {
+	width: 100%;
+}
+.episode-lists-container:after {
+	width: 100%;
+	display: table;
+	clear: both;
+	content: "";
+}
+.episode-list {
+	float: left;
+  	width: 50%;
+}

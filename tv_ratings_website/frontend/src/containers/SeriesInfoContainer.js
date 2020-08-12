@@ -11,10 +11,15 @@ class SeriesInfoContainer extends Component {
       }
     };
     this.cleanSeriesInfo = this.cleanSeriesInfo.bind(this);
+    this.compareRating = this.compareRating.bind(this);
+  }
+  compareRating (a, b) {
+    if (a.average_rating > b.average_rating) return 1;
+    if (a.average_rating < b.average_rating) return -1;
+    return 0;
   }
   cleanSeriesInfo(info) {
     let sortedInfo = info;
-    console.log(sortedInfo);
     sortedInfo.episodes = info.episodes.map(episode => (
       {
         episode_number: episode.episode_number,
@@ -55,6 +60,7 @@ class SeriesInfoContainer extends Component {
     return (
       <SeriesInfo
         info={this.state.info}
+        compareRating={this.compareRating}
       />
     );
   }

@@ -13,7 +13,7 @@ class SearchBar extends Component {
         <div>
           <p>
             <a href={"/series/"+series.id}>
-              {series.original_title}
+              {series.original_title} ({series.start_year})
             </a>
           </p>
         </div>
