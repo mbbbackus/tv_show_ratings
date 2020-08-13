@@ -32,6 +32,7 @@ class SearchBar extends Component {
           placeholder="Type something to search"
         />
         {this.renderSeriesFound()}
+        <button onClick={this.props.getMoreResults}>Get More Results</button>
       </div>
     );
   }

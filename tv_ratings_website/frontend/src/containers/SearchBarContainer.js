@@ -3,44 +3,43 @@ import axios from 'axios';
 import SearchBar from '../components/SearchBar';
 
 class SearchBarContainer extends Component {
-  state = {
-    series_found: null,
-    loading: false,
-    value: ''
-  };
-
+  constructor(props){
+    super(props);
+    this.state = {
+      series_found: null,
+      loading: false,
+      offset: 0,
+      value: ''
+    };
+    this.getMoreResults = this.getMoreResults.bind(this);
+  }
+  
   search = val => {
-    this.setState({ loading: true });
+    this.setState({ loading: true, offset: 0 });
     axios.get(
      	`http://localhost:8000/api/series_by_original_title/?search=${val}`
     ).then(res => this.setState(
     	{
-    		series_found: res.data, 
+    		series_found: res.data.results, 
     		loading: false 
     	}
     )).catch(err => console.log(err));
   };
-
   onChangeHandler = async e => {
     this.search(e.target.value);
     this.setState({ value: e.target.value });
   };
-
-  get renderSeriesFound() {
-    let series_found = <h1>There are no series found</h1>;
-    if (this.state.series_found) {
-      series_found = this.state.series_found.map(series => (
-      	<div>
-      		<p>
-      			<a href={"/series/"+series.id}>
-      				{series.original_title}
-      			</a>
-      		</p>
-      	</div>
-      ));
-    }
-
-    return series_found;
+  getMoreResults () {
+    let offset = this.state.offset;
+    this.setState({ offset: offset + 20 });
+    axios.get(
+      `http://localhost:8000/api/series_by_original_title/?offset=${this.state.offset}&search=${this.state.value}`
+    ).then(res => this.setState(
+      {
+        series_found: this.state.series_found.concat(res.data.results), 
+        loading: false 
+      }
+    )).catch(err => console.log(err));
   }
 
   render() {
@@ -49,6 +48,7 @@ class SearchBarContainer extends Component {
         onChangeHandler={this.onChangeHandler}
         inputValue={this.state.value}
         seriesFound={this.state.series_found}
+        getMoreResults={this.getMoreResults}
       />
     );
   }

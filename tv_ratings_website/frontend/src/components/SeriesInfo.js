@@ -53,7 +53,7 @@ class SeriesInfo extends Component {
     popEpisodeList = popEpisodeList.splice(popEpisodeList.length-5,popEpisodeList.length-1).reverse();
     return popEpisodeList.map(episode => (
       <div key={episode.id}>
-        <p>{episode.name}, {episode.average_rating}</p>
+        <p>S{episode.season_number} E{episode.episode_number}, <b>"{episode.name}"</b>: {episode.average_rating}</p>
       </div>
     ));
   }
@@ -65,7 +65,7 @@ class SeriesInfo extends Component {
     unPopEpisodeList = unPopEpisodeList.splice(0,5);
     return unPopEpisodeList.map(episode => (
       <div key={episode.id}>
-        <p>{episode.name}, {episode.average_rating}</p>
+        <p>S{episode.season_number} E{episode.episode_number}, <b>"{episode.name}"</b>: {episode.average_rating}</p>
       </div>
     ));
   }
@@ -77,7 +77,7 @@ class SeriesInfo extends Component {
       return (
         this.props.unratedEpisodes.map(episode => (
           <div key={episode.id}>
-            <p>{episode.name}, Season {episode.season_number} Episode {episode.episode_number}</p>
+            <p>S{episode.season_number} E{episode.episode_number}, <b>"{episode.name}"</b></p>
           </div>
         ))
       );
