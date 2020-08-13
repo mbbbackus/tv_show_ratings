@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Label } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Label, ResponsiveContainer } from 'recharts';
 
 const CustomTooltip = ({ active, payload, label, info, filteredEps }) => {
   let episode = {};
@@ -106,20 +106,35 @@ class SeriesInfo extends Component {
           {' ' + (this.props.info.end_year !== -1 ? this.props.info.end_year : 'present')})
         </h1>
         <div >
-          <LineChart margin={{bottom: 25}} width={800} height={420} data={filteredEpisodes}>
-            <Line type="monotone" dataKey="average_rating" stroke="black" dot={false}/>
-            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-            <XAxis 
-              dataKey="name" 
-              interval={0}
-              ticks={this.xTicks(filteredEpisodes)}
-              padding={{left:20, right:20}}
+          <ResponsiveContainer height={420} width='100%'>
+            <LineChart 
+              margin={{bottom: 25, right: 25, left:-20}} 
+              data={filteredEpisodes}
             >
-              <Label value="Seasons" position="bottom" offset={5} />
-            </XAxis>
-            <YAxis domain={[0,10]} ticks={[0,2,4,6,8,10]}/>
-            <Tooltip content={<CustomTooltip info={this.props.info} filteredEps={filteredEpisodes}/>}/>
-          </LineChart>
+              <Line 
+                type="monotone" 
+                dataKey="average_rating" 
+                stroke="black" 
+                dot={false}
+              />
+              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+              <XAxis 
+                dataKey="name" 
+                interval={0}
+                ticks={this.xTicks(filteredEpisodes)}
+                padding={{left:20, right:20}}
+              >
+                <Label value="Seasons" position="bottom" offset={5} />
+              </XAxis>
+              <YAxis domain={[0,10]} ticks={[0,2,4,6,8,10]}/>
+              <Tooltip content={
+                <CustomTooltip 
+                  info={this.props.info} 
+                  filteredEps={filteredEpisodes}
+                />}
+              />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
         <div className="random-container"> 
           <div className="episode-lists-container">
