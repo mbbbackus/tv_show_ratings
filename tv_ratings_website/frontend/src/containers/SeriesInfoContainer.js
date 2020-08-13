@@ -7,7 +7,8 @@ class SeriesInfoContainer extends Component {
     super(props);
     this.state = {
       info: {
-        episodes: []
+        episodes: [],
+        unrated: []
       }
     };
     this.cleanSeriesInfo = this.cleanSeriesInfo.bind(this);
@@ -41,16 +42,28 @@ class SeriesInfoContainer extends Component {
       if (aEpiNum < bEpiNum) return -1;
       return 0;
     }
-    // let sortedEpisodes = [...info.episodes];
     sortedInfo.episodes.sort(compare);
-    // sortedInfo.episodes = sortedEpisodes;
 
-    return sortedInfo;
+    let ratedInfo = {...sortedInfo}
+    ratedInfo.episodes = [];
+    let unrated = [];
+    for (let i = 0; i < sortedInfo.episodes.length; i++) {
+      if (sortedInfo.episodes[i].average_rating === -1) {
+        unrated.push(sortedInfo.episodes[i]);
+      } else {
+        ratedInfo.episodes.push(sortedInfo.episodes[i]);
+      }
+    }
+
+    return {
+      info: ratedInfo,
+      unrated: unrated
+    };
   }
   loadSeries = () => {
     const series_uuid = this.props.match.params.seriesId;
     axios.get("http://localhost:8000/api/series/" + series_uuid)
-      .then(res => this.setState({ info: this.cleanSeriesInfo(res.data) }))
+      .then(res => this.setState(this.cleanSeriesInfo(res.data)))
       .catch(err => console.log(err));
   }
   componentDidMount() {
@@ -60,6 +73,7 @@ class SeriesInfoContainer extends Component {
     return (
       <SeriesInfo
         info={this.state.info}
+        unratedEpisodes={this.state.unrated}
         compareRating={this.compareRating}
       />
     );

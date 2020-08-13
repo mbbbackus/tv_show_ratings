@@ -69,6 +69,20 @@ class SeriesInfo extends Component {
       </div>
     ));
   }
+  renderUnratedEpisodes () {
+    if (!this.props.unratedEpisodes){
+      return;
+    }
+    if (this.props.unratedEpisodes.length > 0){
+      return (
+        this.props.unratedEpisodes.map(episode => (
+          <div key={episode.id}>
+            <p>{episode.name}, Season {episode.season_number} Episode {episode.episode_number}</p>
+          </div>
+        ))
+      );
+    }
+  }
   filterEpisodes(episodes) {
     let newEps = [];
     for (let i = 0; i < episodes.length; i++) {
@@ -101,7 +115,7 @@ class SeriesInfo extends Component {
               ticks={this.xTicks(filteredEpisodes)}
               padding={{left:20, right:20}}
             >
-              <Label value="Season" position="bottom" offset={5} />
+              <Label value="Seasons" position="bottom" offset={5} />
             </XAxis>
             <YAxis domain={[0,10]} ticks={[0,2,4,6,8,10]}/>
             <Tooltip content={<CustomTooltip info={this.props.info} filteredEps={filteredEpisodes}/>}/>
@@ -117,6 +131,11 @@ class SeriesInfo extends Component {
               <h3>Unpopular Episodes</h3>
               {this.renderUnpopularEpisodes()}
             </div>
+            <div className="episode-list">
+              <h3>Unrated Episodes</h3>
+              {this.renderUnratedEpisodes()}
+            </div>
+            
           </div>
         </div>
       </div>
