@@ -6,6 +6,6 @@ Data retrieved from: https://www.imdb.com/interfaces/
 
 Goal: Create user interface so that a user can enter the name of a tv show and receive a graph of that tv show's ratings by episode. Additionally I will show what the highest and lowest rated episodes are per series. 
 
-Here is an infographic created by [Bo McCready](https://public.tableau.com/profile/bo.mccready8742#!/) that exemplifies the kinds of graphs that this website will be able to produce:
+The visualizations created by [Bo McCready](https://public.tableau.com/profile/bo.mccready8742#!/) inspired me to create this project.
 
-![Reddit Popular TV Show Graphic](https://i.redd.it/56nya6xhnnp41.png)
+![Screenshot of progress so far](https://i.imgur.com/zhpwHbh.png)
