@@ -16,10 +16,18 @@ const CustomTooltip = ({ active, payload, label, info, filteredEps }) => {
   if (active && payload != null) {
     return (
       <div className="custom-tooltip">
-        <p>{`Season ${episode.season_number} Episode ${episode.episode_number}`}</p>
-        <p>{`"${episode.name}"`}</p>
-        <p>{`rating : ${episode.average_rating}`}</p>
-        <p>{`votes : ${episode.num_votes}`}</p>
+        <p className="tooltip-text">
+          {`Season ${episode.season_number} Episode ${episode.episode_number}`}
+        </p>
+        <p className="tooltip-text">
+          {`"${episode.name}"`}
+        </p>
+        <p className="tooltip-text">
+          {`rating : ${episode.average_rating}`}
+        </p>
+        <p className="tooltip-text">
+          {`votes : ${episode.num_votes}`}
+        </p>
       </div>
     );
   }
@@ -53,7 +61,9 @@ class SeriesInfo extends Component {
     popEpisodeList = popEpisodeList.splice(popEpisodeList.length-5,popEpisodeList.length-1).reverse();
     return popEpisodeList.map(episode => (
       <div key={episode.id}>
-        <p>S{episode.season_number} E{episode.episode_number}, <b>"{episode.name}"</b>: {episode.average_rating}</p>
+        <p className="text-style">
+          S{episode.season_number} E{episode.episode_number}, <b>"{episode.name}"</b>: {episode.average_rating}
+        </p>
       </div>
     ));
   }
@@ -65,7 +75,9 @@ class SeriesInfo extends Component {
     unPopEpisodeList = unPopEpisodeList.splice(0,5);
     return unPopEpisodeList.map(episode => (
       <div key={episode.id}>
-        <p>S{episode.season_number} E{episode.episode_number}, <b>"{episode.name}"</b>: {episode.average_rating}</p>
+        <p className="text-style">
+          S{episode.season_number} E{episode.episode_number}, <b>"{episode.name}"</b>: {episode.average_rating}
+        </p>
       </div>
     ));
   }
@@ -77,7 +89,9 @@ class SeriesInfo extends Component {
       return (
         this.props.unratedEpisodes.map(episode => (
           <div key={episode.id}>
-            <p>S{episode.season_number} E{episode.episode_number}, <b>"{episode.name}"</b></p>
+            <p className="text-style">
+              S{episode.season_number} E{episode.episode_number}, <b>"{episode.name}"</b>
+            </p>
           </div>
         ))
       );
@@ -98,8 +112,8 @@ class SeriesInfo extends Component {
     let filteredEpisodes = this.filterEpisodes(this.props.info.episodes);
     return (
       <div className="series-info">
-        <a href="/search">Back To Search</a>
-        <h1>
+        <a className="back-to-search text-style" href="/search">Back To Search</a>
+        <h1 className="text-style series-title">
           {this.props.info.primary_title + ' '} 
           ({this.props.info.start_year + ' '}
           - 
@@ -116,29 +130,29 @@ class SeriesInfo extends Component {
                   <Line 
                     type="monotone" 
                     dataKey="average_rating" 
-                    stroke="black" 
+                    stroke="#614d12" 
                     dot={false}
                   />
-                  <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                  <CartesianGrid stroke="#ab8b2e" strokeDasharray="5 5" />
                   <XAxis 
                     dataKey="name" 
                     interval={0}
                     ticks={this.xTicks(filteredEpisodes)}
                     padding={{left:20, right:20}}
-                  >
-                    <Label value="Seasons" position="bottom" offset={5} />
-                  </XAxis>
-                  <YAxis domain={[0,10]} ticks={[0,2,4,6,8,10]}/>
-                  <Tooltip content={
+                    stroke="#614d12"
+                  />
+                  <YAxis domain={[0,10]} ticks={[0,2,4,6,8,10]} stroke="#614d12"/>
+                  <Tooltip cursor={{ stroke: '#614d12'}} content={
                     <CustomTooltip 
                       info={this.props.info} 
                       filteredEps={filteredEpisodes}
+                      stroke="#614d12"
                     />}
                   />
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            <div className="unrated-episode-list">
+            <div className="unrated-episode-list text-style">
               <h3>Unrated Episodes</h3>
               {this.renderUnratedEpisodes()}
             </div>
@@ -147,11 +161,11 @@ class SeriesInfo extends Component {
         <div className="bottom-content-container"> 
           <div className="episode-lists-container">
             <div className="episode-list">
-              <h3>Popular Episodes</h3>
+              <h3 className="text-style">Popular Episodes</h3>
               {this.renderPopularEpisodes()}
             </div>
             <div className="episode-list">
-              <h3>Unpopular Episodes</h3>
+              <h3 className="text-style">Unpopular Episodes</h3>
               {this.renderUnpopularEpisodes()}
             </div>
           </div>
