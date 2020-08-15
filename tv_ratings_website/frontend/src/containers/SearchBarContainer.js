@@ -15,6 +15,10 @@ class SearchBarContainer extends Component {
   }
   
   search = val => {
+    if (val === "") {
+      this.setState({series_found: ""});
+      return;
+    }
     this.setState({ loading: true, offset: 0 });
     axios.get(
      	`http://localhost:8000/api/series_by_original_title/?search=${val}`
@@ -31,7 +35,7 @@ class SearchBarContainer extends Component {
   };
   getMoreResults () {
     let offset = this.state.offset;
-    this.setState({ offset: offset + 20 });
+    this.setState({ offset: offset + 10 });
     axios.get(
       `http://localhost:8000/api/series_by_original_title/?offset=${this.state.offset}&search=${this.state.value}`
     ).then(res => this.setState(

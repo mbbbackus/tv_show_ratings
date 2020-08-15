@@ -7,11 +7,11 @@ class SearchBar extends Component {
   }
 
   renderSeriesFound() {
-    let series_found = <h1>There are no series found</h1>;
+    let series_found = "";
     if (this.props.seriesFound) {
       series_found = this.props.seriesFound.map(series => (
-        <div>
-          <p>
+        <div className="series-container">
+          <p className="series-found">
             <a href={"/series/"+series.id}>
               {series.original_title} ({series.start_year})
             </a>
@@ -26,13 +26,27 @@ class SearchBar extends Component {
   render() {
     return (
       <div>
-        <input
-          value={this.props.inputValue}
-          onChange={e => this.props.onChangeHandler(e)}
-          placeholder="Type something to search"
-        />
-        {this.renderSeriesFound()}
-        <button onClick={this.props.getMoreResults}>Get More Results</button>
+        <div className="search-bar-container">
+          <div className="search-bar">
+            <input
+              className="search-bar-input"
+              value={this.props.inputValue}
+              onChange={e => this.props.onChangeHandler(e)}
+              placeholder="Enter a tv show"
+            />
+          </div>
+        </div>
+        <div className="series-found-container">
+          {this.props.seriesFound && this.renderSeriesFound()}
+          {this.props.seriesFound &&
+            <button 
+              onClick={this.props.getMoreResults}
+            >
+              Get More Results
+            </button>
+          }
+        </div>
+        
       </div>
     );
   }
