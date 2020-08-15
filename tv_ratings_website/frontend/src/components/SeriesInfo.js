@@ -105,38 +105,46 @@ class SeriesInfo extends Component {
           - 
           {' ' + (this.props.info.end_year !== -1 ? this.props.info.end_year : 'present')})
         </h1>
-        <div >
-          <ResponsiveContainer height={420} width='100%'>
-            <LineChart 
-              margin={{bottom: 25, right: 25, left:-20}} 
-              data={filteredEpisodes}
-            >
-              <Line 
-                type="monotone" 
-                dataKey="average_rating" 
-                stroke="black" 
-                dot={false}
-              />
-              <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-              <XAxis 
-                dataKey="name" 
-                interval={0}
-                ticks={this.xTicks(filteredEpisodes)}
-                padding={{left:20, right:20}}
-              >
-                <Label value="Seasons" position="bottom" offset={5} />
-              </XAxis>
-              <YAxis domain={[0,10]} ticks={[0,2,4,6,8,10]}/>
-              <Tooltip content={
-                <CustomTooltip 
-                  info={this.props.info} 
-                  filteredEps={filteredEpisodes}
-                />}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+        <div className="top-content-container">
+          <div className="episode-top-container">
+            <div className="chart-container">
+              <ResponsiveContainer height={420} width='100%'>
+                <LineChart 
+                  margin={{bottom: 25, right: 25, left:-20}} 
+                  data={filteredEpisodes}
+                >
+                  <Line 
+                    type="monotone" 
+                    dataKey="average_rating" 
+                    stroke="black" 
+                    dot={false}
+                  />
+                  <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                  <XAxis 
+                    dataKey="name" 
+                    interval={0}
+                    ticks={this.xTicks(filteredEpisodes)}
+                    padding={{left:20, right:20}}
+                  >
+                    <Label value="Seasons" position="bottom" offset={5} />
+                  </XAxis>
+                  <YAxis domain={[0,10]} ticks={[0,2,4,6,8,10]}/>
+                  <Tooltip content={
+                    <CustomTooltip 
+                      info={this.props.info} 
+                      filteredEps={filteredEpisodes}
+                    />}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="unrated-episode-list">
+              <h3>Unrated Episodes</h3>
+              {this.renderUnratedEpisodes()}
+            </div>
+          </div>
         </div>
-        <div className="random-container"> 
+        <div className="bottom-content-container"> 
           <div className="episode-lists-container">
             <div className="episode-list">
               <h3>Popular Episodes</h3>
@@ -146,11 +154,6 @@ class SeriesInfo extends Component {
               <h3>Unpopular Episodes</h3>
               {this.renderUnpopularEpisodes()}
             </div>
-            <div className="episode-list">
-              <h3>Unrated Episodes</h3>
-              {this.renderUnratedEpisodes()}
-            </div>
-            
           </div>
         </div>
       </div>
