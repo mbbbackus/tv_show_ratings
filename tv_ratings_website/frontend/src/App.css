@@ -50,15 +50,7 @@ body, .search-bar-input  {
 .series-title {
 	margin-left: 40px;
 }
-.episode-lists-container:after {
-	display: table;
-	clear: both;
-	content: "";
-}
-.episode-list {
-	float: left;
-  	width: 33%;
-}
+
 .custom-tooltip {
 	background-color: hsl(45,90%,70%,0.90);
 	border-radius: 10px;
@@ -96,6 +88,19 @@ body, .search-bar-input  {
 .back-to-search:hover {
 	text-decoration: underline;
 }
-.bottom-content-container {
-	margin-left: 40px;
+
+
+.bottom-table-container {
+	display: table;
+	width: calc(100% - 100px);
+	margin-left: 35px;
+}
+.bottom-table-body {
+	display: table-row-group;
+}
+.bottom-table-row {
+  	display: table-row;
+}
+.bottom-table-cell {
+	display: table-cell;
 }

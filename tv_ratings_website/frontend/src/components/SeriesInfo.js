@@ -38,8 +38,7 @@ const CustomTooltip = ({ active, payload, label, info, filteredEps }) => {
 class SeriesInfo extends Component {
   constructor(props) {
     super(props);
-    this.renderPopularEpisodes = this.renderPopularEpisodes.bind(this);
-    this.renderUnpopularEpisodes = this.renderUnpopularEpisodes.bind(this);
+    this.renderEpisodes = this.renderEpisodes.bind(this);
     this.filterEpisodes = this.filterEpisodes.bind(this);
     this.xTicks = this.xTicks.bind(this);
   }
@@ -53,31 +52,30 @@ class SeriesInfo extends Component {
     }
     return ticks;
   }
-  renderPopularEpisodes () {
-    if (this.props.info.episodes.length === 0)
+  renderEpisodes () {
+    let len = this.props.info.episodes.length;
+    if (len === 0)
       return;
-    let popEpisodeList = [...this.props.info.episodes];
-    popEpisodeList.sort(this.props.compareRating);
-    popEpisodeList = popEpisodeList.splice(popEpisodeList.length-5,popEpisodeList.length-1).reverse();
-    return popEpisodeList.map(episode => (
-      <div key={episode.id}>
-        <p className="text-style">
-          S{episode.season_number} E{episode.episode_number}, <b>"{episode.name}"</b>: {episode.average_rating}
-        </p>
-      </div>
-    ));
-  }
-  renderUnpopularEpisodes () {
-    if (this.props.info.episodes.length === 0)
-      return;
-    let unPopEpisodeList = [...this.props.info.episodes];
-    unPopEpisodeList.sort(this.props.compareRating);
-    unPopEpisodeList = unPopEpisodeList.splice(0,5);
-    return unPopEpisodeList.map(episode => (
-      <div key={episode.id}>
-        <p className="text-style">
-          S{episode.season_number} E{episode.episode_number}, <b>"{episode.name}"</b>: {episode.average_rating}
-        </p>
+
+    let episodeList = [...this.props.info.episodes];
+    episodeList.sort(this.props.compareRating);
+    let popEpisodeList = episodeList.splice(len-5, len-1).reverse();
+    let unPopEpisodeList = episodeList.splice(0,5);
+    let unratedEpisodes = this.props.unratedEpisodes
+
+    return popEpisodeList.map((episode,i) => (
+      <div className="bottom-table-row" key={episode.id}>
+        <div className="bottom-table-cell">
+          <p className="text-style">
+            S{episode.season_number} E{episode.episode_number}, <b>"{episode.name}"</b>: {episode.average_rating}
+          </p>
+        </div>
+        <div className="bottom-table-cell">
+          <p className="text-style">
+            S{unPopEpisodeList[i].season_number} E{unPopEpisodeList[i].episode_number}, <b>"{unPopEpisodeList[i].name}"</b>: {unPopEpisodeList[i].average_rating}
+          </p>
+        </div>
+        <div className="bottom-table-cell"></div>
       </div>
     ));
   }
@@ -99,17 +97,31 @@ class SeriesInfo extends Component {
   }
   filterEpisodes(episodes) {
     let newEps = [];
+    let ymin = 10;
+    let ymax = 0;
     for (let i = 0; i < episodes.length; i++) {
       let ep = {...episodes[i]};
+      if (ep.average_rating > ymax) {
+        ymax = ep.average_rating;
+      } else if (ep.average_rating < ymin) {
+        ymin = ep.average_rating;
+      }
       if (ep.episode_number === 1){
         ep.name = JSON.stringify(ep.season_number);
+        // newEps.push({name: "season gap"}) de-comment to disconnect seasons on line graph
       } 
       newEps.push(ep);
     }
-    return newEps;
+
+    return {
+      ydomain: [Math.floor(ymin), Math.ceil(ymax)], 
+      filteredEpisodes: newEps}
+    ;
   }
   render () {
-    let filteredEpisodes = this.filterEpisodes(this.props.info.episodes);
+    let res = this.filterEpisodes(this.props.info.episodes);
+    let ydomain = res.ydomain;
+    let filteredEpisodes = res.filteredEpisodes;
     return (
       <div className="series-info">
         <a className="back-to-search text-style" href="/search">Back To Search</a>
@@ -131,9 +143,11 @@ class SeriesInfo extends Component {
                     type="monotone" 
                     dataKey="average_rating" 
                     stroke="#614d12" 
+                    strokeWidth={2}
                     dot={false}
+                    connectNulls={false}
                   />
-                  <CartesianGrid stroke="#ab8b2e" strokeDasharray="5 5" />
+                  <CartesianGrid stroke="#614d12" strokeDasharray="0 5" />
                   <XAxis 
                     dataKey="name" 
                     interval={0}
@@ -141,7 +155,7 @@ class SeriesInfo extends Component {
                     padding={{left:20, right:20}}
                     stroke="#614d12"
                   />
-                  <YAxis domain={[0,10]} ticks={[0,2,4,6,8,10]} stroke="#614d12"/>
+                  <YAxis domain={ydomain} stroke="#614d12"/>
                   <Tooltip cursor={{ stroke: '#614d12'}} content={
                     <CustomTooltip 
                       info={this.props.info} 
@@ -152,24 +166,25 @@ class SeriesInfo extends Component {
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            {this.props.unratedEpisodes &&
-              <div className="unrated-episode-list text-style">
-                <h3>Unrated Episodes</h3>
-                {this.renderUnratedEpisodes()}
-              </div>
-            }
           </div>
         </div>
-        <div className="bottom-content-container"> 
-          <div className="episode-lists-container">
-            <div className="episode-list">
-              <h3 className="text-style">Popular Episodes</h3>
-              {this.renderPopularEpisodes()}
+        <div className="bottom-table-container"> 
+          <div className="bottom-table-body">
+            <div className="bottom-table-row">
+              <div className="bottom-table-cell">
+                <h3 className="text-style">Popular Episodes</h3>
+              </div>
+              <div className="bottom-table-cell">
+                <h3 className="text-style">Unpopular Episodes</h3>
+              </div>
+              {this.props.unratedEpisodes &&
+                <div className="bottom-table-cell">
+                  <h3 className="text-style">Unrated Episodes</h3>
+                </div>
+              }
             </div>
-            <div className="episode-list">
-              <h3 className="text-style">Unpopular Episodes</h3>
-              {this.renderUnpopularEpisodes()}
-            </div>
+            {this.renderEpisodes()}
+            
           </div>
         </div>
       </div>
@@ -178,3 +193,10 @@ class SeriesInfo extends Component {
 }
 
 export default SeriesInfo;
+
+// {this.props.unratedEpisodes &&
+//   <div className="unrated-episode-list text-style">
+//     <h3>Unrated Episodes</h3>
+//     {this.renderUnratedEpisodes()}
+//   </div>
+// }
