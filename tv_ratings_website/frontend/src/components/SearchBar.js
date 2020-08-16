@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import tvTestCard from "../media/tvtestcard.png";
 
 class SearchBar extends Component {
   constructor(props) {
@@ -27,7 +28,10 @@ class SearchBar extends Component {
     return (
       <div>
         <div className="search-bar-container">
-          <h1 className="plot-title text-style">Plot the Plot</h1>
+          <div className="title-container">
+            <h1 className="plot-title text-style">Plot the Plot</h1>
+            <img className="tv-test-card" src={tvTestCard}/>
+          </div>
           <h2 className="plot-subtitle text-style">Explore the data behind your favorite tv shows</h2>
           <div className="search-bar">
             <input
