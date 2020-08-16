@@ -140,10 +140,10 @@ class SeriesInfo extends Component {
                   data={filteredEpisodes}
                 >
                   <Line 
-                    type="monotone" 
+                    type="step" 
                     dataKey="average_rating" 
                     stroke="#614d12" 
-                    strokeWidth={2}
+                    strokeWidth={0.75}
                     dot={false}
                     connectNulls={false}
                   />
