@@ -152,10 +152,12 @@ class SeriesInfo extends Component {
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            <div className="unrated-episode-list text-style">
-              <h3>Unrated Episodes</h3>
-              {this.renderUnratedEpisodes()}
-            </div>
+            {this.props.unratedEpisodes &&
+              <div className="unrated-episode-list text-style">
+                <h3>Unrated Episodes</h3>
+                {this.renderUnratedEpisodes()}
+              </div>
+            }
           </div>
         </div>
         <div className="bottom-content-container"> 

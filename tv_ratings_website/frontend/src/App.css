@@ -80,7 +80,7 @@ body, .search-bar-input  {
 }
 .chart-container {
 	float: left;
-  	width: 75%;
+  	width: 100%;
 }
 .unrated-episode-list {
 	float:right;
