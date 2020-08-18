@@ -80,7 +80,7 @@ body, .search-bar-input  {
 }
 
 .custom-tooltip {
-	background-color: hsl(45,90%,70%,0.90);
+	background-color: white;
 	border-radius: 10px;
 	padding: 1px 10px;
 }

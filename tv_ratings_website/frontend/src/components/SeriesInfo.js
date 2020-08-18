@@ -194,9 +194,3 @@ class SeriesInfo extends Component {
 
 export default SeriesInfo;
 
-// {this.props.unratedEpisodes &&
-//   <div className="unrated-episode-list text-style">
-//     <h3>Unrated Episodes</h3>
-//     {this.renderUnratedEpisodes()}
-//   </div>
-// }
