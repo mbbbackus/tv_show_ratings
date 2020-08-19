@@ -156,7 +156,7 @@ class SeriesInfo extends Component {
                     stroke="#614d12"
                   />
                   <YAxis domain={ydomain} stroke="#614d12"/>
-                  <Tooltip cursor={{ stroke: '#614d12'}} content={
+                  <Tooltip position={{ x: 400, y: -100 }} cursor={{ stroke: '#614d12'}} content={
                     <CustomTooltip 
                       info={this.props.info} 
                       filteredEps={filteredEpisodes}
