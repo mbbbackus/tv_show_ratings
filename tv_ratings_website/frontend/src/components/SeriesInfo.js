@@ -17,16 +17,7 @@ const CustomTooltip = ({ active, payload, label, info, filteredEps }) => {
     return (
       <div className="custom-tooltip">
         <p className="tooltip-text">
-          {`Season ${episode.season_number} Episode ${episode.episode_number}`}
-        </p>
-        <p className="tooltip-text">
-          {`"${episode.name}"`}
-        </p>
-        <p className="tooltip-text">
-          {`rating : ${episode.average_rating}`}
-        </p>
-        <p className="tooltip-text">
-          {`votes : ${episode.num_votes}`}
+          {`Season ${episode.season_number} Episode ${episode.episode_number}`}, {`"${episode.name}"`}, {`rating : ${episode.average_rating}`}, {`votes : ${episode.num_votes}`}
         </p>
       </div>
     );
@@ -156,7 +147,7 @@ class SeriesInfo extends Component {
                     stroke="#614d12"
                   />
                   <YAxis domain={ydomain} stroke="#614d12"/>
-                  <Tooltip position={{ x: 400, y: -100 }} cursor={{ stroke: '#614d12'}} content={
+                  <Tooltip position={{ x: 32, y: -60 }} cursor={{ stroke: '#614d12'}} content={
                     <CustomTooltip 
                       info={this.props.info} 
                       filteredEps={filteredEpisodes}

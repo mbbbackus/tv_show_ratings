@@ -99,6 +99,7 @@ body, .search-bar-input  {
 	content: "";
 }
 .chart-container {
+	margin-top: 50px;
 	float: left;
 	width: 100%;
 }
