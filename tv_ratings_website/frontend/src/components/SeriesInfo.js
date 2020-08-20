@@ -17,7 +17,10 @@ const CustomTooltip = ({ active, payload, label, info, filteredEps }) => {
     return (
       <div className="custom-tooltip">
         <p className="tooltip-text">
-          {`Season ${episode.season_number} Episode ${episode.episode_number}`}, {`"${episode.name}"`}, {`rating : ${episode.average_rating}`}, {`votes : ${episode.num_votes}`}
+          {`S${episode.season_number} E${episode.episode_number}`}, <b>{`"${episode.name}"`}</b>, {`${episode.average_rating}`}
+        </p>
+        <p className="tooltip-text">
+          {`${episode.num_votes} votes`}
         </p>
       </div>
     );
@@ -127,7 +130,7 @@ class SeriesInfo extends Component {
             <div className="chart-container">
               <ResponsiveContainer height={420} width='100%'>
                 <LineChart 
-                  margin={{bottom: 25, right: 25, left:-20}} 
+                  margin={{bottom: 25, right: 25, left: -15}} 
                   data={filteredEpisodes}
                 >
                   <Line 
@@ -143,11 +146,16 @@ class SeriesInfo extends Component {
                     dataKey="name" 
                     interval={0}
                     ticks={this.xTicks(filteredEpisodes)}
+                    label={{ value: 'season number', position: 'bottom' }}
                     padding={{left:20, right:20}}
                     stroke="#614d12"
                   />
-                  <YAxis domain={ydomain} stroke="#614d12"/>
-                  <Tooltip position={{ x: 32, y: -60 }} cursor={{ stroke: '#614d12'}} content={
+                  <YAxis 
+                    domain={ydomain} 
+                    stroke="#614d12"
+                    label={{ value: 'episode rating', angle: -90, position: 'insideLeft', offset: 25 }}
+                  />
+                  <Tooltip position={{ x: 32, y: -79 }} cursor={{ stroke: '#614d12'}} content={
                     <CustomTooltip 
                       info={this.props.info} 
                       filteredEps={filteredEpisodes}
