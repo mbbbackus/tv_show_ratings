@@ -28,15 +28,20 @@ body, .search-bar-input  {
 	margin-top: -40px;
 	height: 10px;
 	width: 400px;
-	animation: 2s ease-in-out 0s 1 widenBig;
+	animation: widenBig 2s ease-in-out 0s 1;
 }
 .back-to-search {
 	text-decoration: none;
 	font-family: Arial;
 	color: black;
 }
-.back-to-search:hover {
-	color: darkred;
+.test-card-back {
+	height: 3px;
+	width: 0px;
+	display: block;
+}
+.back-to-search:hover + .test-card-back {
+	animation: widenSmall .5s ease-out forwards;
 }
 @keyframes widenSmall {
 	from {
@@ -45,12 +50,6 @@ body, .search-bar-input  {
 	to {
 		width: 120px;
 	}
-}
-.test-card-back {
-	height: 3px;
-	width: 120px;
-	display: block;
-	animation: 2s ease-in-out 0s 1 widenSmall;
 }
 /* animation: name duration timing-function 
 	delay iteration-count direction fill-mode 
