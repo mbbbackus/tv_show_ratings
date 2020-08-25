@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import ColoredCursor from "./ColoredCursor";
 import CustomTooltip from "./CustomTooltip";
+import tvTestCard from "../media/tvtestcard.png";
 
 class SeriesInfo extends Component {
   constructor(props) {
@@ -92,7 +93,8 @@ class SeriesInfo extends Component {
     let filteredEpisodes = res.filteredEpisodes;
     return (
       <div className="series-info">
-        <a className="back-to-search text-style" href="/search">Back To Search</a>
+        <a className="back-to-search" href="/search">Back To Search</a>
+        <img className="test-card-back" src={tvTestCard}/>
         <h1 className="text-style series-title">
           {this.props.info.primary_title + ' '} 
           ({this.props.info.start_year + ' '}
