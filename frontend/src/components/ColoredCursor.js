@@ -1,6 +1,6 @@
 import { Tooltip } from 'recharts';
 
-let tvTestCardColors = [ "#FFFD38", "#0B24FA", "#FB0D1C", "#FD28FC", "#2AFD2F", "#2DFFFE"];
+let tvTestCardColors = [ "#FCE742", "#0B24FA", "#FB0D1C", "#FD28FC", "#2AFD2F", "#2DFFFE"];
 
 class ColoredCursor extends Tooltip {
   constructor(props){ 

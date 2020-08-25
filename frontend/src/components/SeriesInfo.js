@@ -115,6 +115,7 @@ class SeriesInfo extends Component {
                     stroke="#614d12" 
                     strokeWidth={0.75}
                     dot={false}
+                    activeDot={false}
                     connectNulls={false}
                   />
                   <CartesianGrid stroke="#614d12" strokeDasharray="0 5" />
@@ -131,7 +132,7 @@ class SeriesInfo extends Component {
                     stroke="#614d12"
                     label={{ value: 'episode rating', angle: -90, position: 'insideLeft', offset: 20 }}
                   />
-                  <ColoredCursor position={{ x: 32, y: -79 }} cursor={{ strokeWidth: '1.5'}} content={
+                  <ColoredCursor position={{ x: 32, y: -79 }} cursor={{ strokeWidth: '1.75'}} content={
                     <CustomTooltip 
                       info={this.props.info} 
                       filteredEps={filteredEpisodes}

@@ -70,6 +70,9 @@ class SeriesInfoContainer extends Component {
     this.loadSeries();
   }
   render () {
+    document.title = "Plot the plot";
+    if (this.state.info.primary_title)
+      document.title = "Plot the plot | " + this.state.info.primary_title;
     return (
       <SeriesInfo
         info={this.state.info}
