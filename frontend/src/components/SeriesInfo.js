@@ -129,11 +129,10 @@ class SeriesInfo extends Component {
                     stroke="#614d12"
                     label={{ value: 'episode rating', angle: -90, position: 'insideLeft', offset: 20 }}
                   />
-                  <ColoredCursor position={{ x: 32, y: -79 }} cursor={{ stroke: '#fd28fd', strokeWidth: '1.5'}} content={
+                  <ColoredCursor position={{ x: 32, y: -79 }} cursor={{ strokeWidth: '1.5'}} content={
                     <CustomTooltip 
                       info={this.props.info} 
                       filteredEps={filteredEpisodes}
-                      stroke="#614d12"
                     />}
                   />
                 </LineChart>
