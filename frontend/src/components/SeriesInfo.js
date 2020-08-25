@@ -1,33 +1,7 @@
 import React, { Component } from "react";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Label, ResponsiveContainer } from 'recharts';
-
-const CustomTooltip = ({ active, payload, label, info, filteredEps }) => {
-  let episode = {};
-  for (let i = 0; i < info.episodes.length; i++) {
-    // TODO: find episode by id, not name
-    if (info.episodes[i].name === label) {
-      episode = info.episodes[i]; 
-      break;
-    } else if (filteredEps[i].name === label) {
-      episode = info.episodes[i];
-      break;
-    }
-  }
-  if (active && payload != null) {
-    return (
-      <div className="custom-tooltip">
-        <p className="tooltip-text">
-          {`S${episode.season_number} E${episode.episode_number}`}, <b>{`"${episode.name}"`}</b>, {`${episode.average_rating}`}
-        </p>
-        <p className="tooltip-text">
-          {`${episode.num_votes} votes`}
-        </p>
-      </div>
-    );
-  }
-
-  return null;
-};
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
+import ColoredCursor from "./ColoredCursor";
+import CustomTooltip from "./CustomTooltip";
 
 class SeriesInfo extends Component {
   constructor(props) {
@@ -153,9 +127,9 @@ class SeriesInfo extends Component {
                   <YAxis 
                     domain={ydomain} 
                     stroke="#614d12"
-                    label={{ value: 'episode rating', angle: -90, position: 'insideLeft', offset: 25 }}
+                    label={{ value: 'episode rating', angle: -90, position: 'insideLeft', offset: 20 }}
                   />
-                  <Tooltip position={{ x: 32, y: -79 }} cursor={{ stroke: '#614d12'}} content={
+                  <ColoredCursor position={{ x: 32, y: -79 }} cursor={{ stroke: '#fd28fd', strokeWidth: '1.5'}} content={
                     <CustomTooltip 
                       info={this.props.info} 
                       filteredEps={filteredEpisodes}

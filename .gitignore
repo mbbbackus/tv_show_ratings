@@ -7,3 +7,4 @@ tv_ratings_website/ratings_api/migrations/__pycache__/
 tv_ratings_website/db.sqlite3
 node_modules/
 yarn.lock
+frontend/build/
