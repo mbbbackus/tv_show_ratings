@@ -123,7 +123,6 @@ class SeriesInfo extends Component {
                   <XAxis 
                     dataKey="name" 
                     interval={0}
-                    axisLine={false}
                     ticks={this.xTicks(filteredEpisodes)}
                     padding={{left:20, right:20}}
                     stroke="white"
@@ -140,7 +139,6 @@ class SeriesInfo extends Component {
                   <YAxis 
                     domain={ydomain} 
                     stroke="white"
-                    axisLine={false}
                   >
                     <Label
                       value={'episode rating'} 

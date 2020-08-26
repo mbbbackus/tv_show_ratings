@@ -8,14 +8,45 @@ body, .search-bar-input  {
 }
 .title-container {
 }
+@keyframes fadeInFromBottom {
+	from {
+		opacity: 0;
+		padding-top: 100px;
+	}
+	to {
+		opacity: 100%;
+		padding-top: 10px;
+	}
+}
 .search-bar-container {
+	padding-top: 10px;
 	width: 400px;
 	margin: auto;
 	position:relative;
+	animation: fadeInFromBottom 1s ease-in-out;
 }
 .plot-title {
 	margin-top: 33%;
 	font-size: 48px;
+}
+.search-bar-input {
+	width: 400px;
+	height: 40px;
+	font-size: 32px;
+	border: 0;
+	color: white;
+}
+.search-bar-input:focus {
+	outline: 0;
+}
+.tv-test-card {
+	margin-top: -40px;
+	height: 3px;
+	width: 0px;
+	/*animation: widenBig 2s ease-in-out 0s 1;*/
+}
+.search-bar-input:focus + .tv-test-card {
+	animation: widenBig .5s ease-out forwards;
 }
 @keyframes widenBig {
 	from {
@@ -24,12 +55,6 @@ body, .search-bar-input  {
 	to {
 		width: 400px;
 	}
-}
-.tv-test-card {
-	margin-top: -40px;
-	height: 10px;
-	width: 400px;
-	animation: widenBig 2s ease-in-out 0s 1;
 }
 .back-to-search {
 	text-decoration: none;
@@ -56,9 +81,9 @@ body, .search-bar-input  {
 		width: 120px;
 	}
 }
-/* animation: name duration timing-function 
-	delay iteration-count direction fill-mode 
-	play-state;*/
+.plot-subtitle {
+	color: gray;
+}
 
 .plot-title, .plot-subtitle {
 	font-weight: 100;
@@ -66,13 +91,7 @@ body, .search-bar-input  {
 ::placeholder {
 	color: #a8a8a8;
 }
-.search-bar-input {
-	width: 400px;
-	height: 40px;
-	font-size: 32px;
-	border: 0;
-	color: #a8a8a8;
-}
+
 .rating {
 	display: inline-block;
 	font-size: 32px;
@@ -81,12 +100,7 @@ body, .search-bar-input  {
 	color: gray;
 	display: inline-block;
 }
-.search-bar-input:hover, .search-bar-input:focus {
-	border-bottom: 1px solid #a8a8a8;
-}
-.search-bar-input:focus {
-	outline: 0;
-}
+
 .series-found-container {
 	width: 400px;
 	margin:auto;
@@ -95,10 +109,11 @@ body, .search-bar-input  {
 	margin-left: 3px;
 }
 .series-found a {
+	color: gray;
 	text-decoration: none;
 }
 .series-found a:hover {
-	color: #6e5817;
+	color: white;
 }
 .series-title {
 	margin-left: 40px;

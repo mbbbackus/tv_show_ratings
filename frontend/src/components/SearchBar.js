@@ -30,7 +30,6 @@ class SearchBar extends Component {
         <div className="search-bar-container">
           <div className="title-container">
             <h1 className="plot-title text-style">Plot the Plot</h1>
-            <img className="tv-test-card" src={tvTestCard}/>
           </div>
           <h2 className="plot-subtitle text-style">Explore the data behind your favorite tv shows</h2>
           <div className="search-bar">
@@ -40,6 +39,7 @@ class SearchBar extends Component {
               onChange={e => this.props.onChangeHandler(e)}
               placeholder="e.g. Game of Thrones"
             />
+            <img className="tv-test-card" src={tvTestCard}/>
           </div>
         </div>
         <div className="series-found-container">
