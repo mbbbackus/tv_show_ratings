@@ -46,11 +46,13 @@ class SearchBar extends Component {
           {this.props.seriesFound && this.renderSeriesFound()}
           {this.props.seriesFound &&
             <div className="get-more-results">
-              <button
-                onClick={this.props.getMoreResults}
-              >
-                Get More Results
-              </button>
+              {this.props.seriesFound.length === 10 &&
+                <button
+                  onClick={this.props.getMoreResults}
+                >
+                  Get More Results
+                </button>
+              }
             </div>
           }
         </div>
