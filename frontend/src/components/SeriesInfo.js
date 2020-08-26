@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Label, ResponsiveContainer, Tooltip } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Label, ResponsiveContainer, Tooltip, ReferenceLine } from 'recharts';
 import ColoredCursor from "./ColoredCursor";
 import CustomTooltip from "./CustomTooltip";
 import tvTestCard from "../media/tvtestcard.png";
@@ -34,15 +34,32 @@ class SeriesInfo extends Component {
 
     return popEpisodeList.map((episode,i) => (
       <div className="bottom-table-row" key={episode.id}>
-        <div className="bottom-table-cell">
-          <p className="text-style">
-            S{episode.season_number} E{episode.episode_number}, <b>"{episode.name}"</b>: {episode.average_rating}
-          </p>
+        <div className="bottom-table-cell inline">
+          <div className="percent-bar popular-dark-green ">
+            <div 
+              className="inner-percent-bar popular-green" 
+              style={{"width": `${episode.average_rating * 50}px`}}
+            >
+              <p className="text-style episode-percent-text inline">
+                S{episode.season_number} E{episode.episode_number}, "{episode.name}" 
+              </p>
+              <p className="inline in-percent-text text-style">{episode.average_rating}</p>
+            </div>
+          </div>
         </div>
-        <div className="bottom-table-cell">
-          <p className="text-style">
-            S{unPopEpisodeList[i].season_number} E{unPopEpisodeList[i].episode_number}, <b>"{unPopEpisodeList[i].name}"</b>: {unPopEpisodeList[i].average_rating}
-          </p>
+        <div className="bottom-table-cell inline right">
+          <div className="percent-bar unpopular-dark-red">
+            <div 
+              className="inner-percent-bar unpopular-red" 
+              style={{"width": `${unPopEpisodeList[i].average_rating * 50}px`, "display": "inline-block"}}
+            >
+              <p className="text-style episode-percent-text">
+                S{unPopEpisodeList[i].season_number} E{unPopEpisodeList[i].episode_number}, "{unPopEpisodeList[i].name}"
+              </p>
+            </div>
+            <p className="inline text-style out-percent-text">{unPopEpisodeList[i].average_rating}</p>
+          </div>
+          
         </div>
         <div className="bottom-table-cell"></div>
       </div>
@@ -93,8 +110,12 @@ class SeriesInfo extends Component {
     let filteredEpisodes = res.filteredEpisodes;
     return (
       <div className="series-info">
-        <a className="back-to-search" href="/search">Back To Search</a>
-        <img className="test-card-back" src={tvTestCard}/>
+        <div className="back-to-search-container">
+          <a className="back-to-search" href="/search">
+            <div class="fa fa-search"></div> Back To Search
+          </a>
+          <img className="test-card-back" src={tvTestCard}/>
+        </div>
         <h3 className="text-style series-title">
           {this.props.info.primary_title + ' '} 
           ({this.props.info.start_year + ' '}
@@ -151,6 +172,19 @@ class SeriesInfo extends Component {
                       }}
                     />
                   </YAxis>
+                  {(filteredEpisodes.length > 0 && false) &&
+                    <ReferenceLine x={filteredEpisodes[0].name} stroke="green">
+                      <Label
+                        value={filteredEpisodes[0].num_votes} 
+                        position={{ y: -50 }}
+                        offset={400}
+                        style={{
+                          fill: 'white',
+                          fontFamily: 'Arial'
+                        }}
+                      />
+                    </ReferenceLine>
+                  }
                   <ColoredCursor 
                     position={{ y: -50 }} 
                     cursor={{ strokeWidth: '1.75'}} 
@@ -169,17 +203,12 @@ class SeriesInfo extends Component {
         <div className="bottom-table-container"> 
           <div className="bottom-table-body">
             <div className="bottom-table-row">
-              <div className="bottom-table-cell">
+              <div className="bottom-table-cell inline">
                 <h3 className="text-style">Popular Episodes</h3>
               </div>
-              <div className="bottom-table-cell">
+              <div className="bottom-table-cell inline right">
                 <h3 className="text-style">Unpopular Episodes</h3>
               </div>
-              {this.props.unratedEpisodes &&
-                <div className="bottom-table-cell">
-                  <h3 className="text-style">Unrated Episodes</h3>
-                </div>
-              }
             </div>
             {this.renderEpisodes()}
             

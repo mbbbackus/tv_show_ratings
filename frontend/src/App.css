@@ -6,8 +6,6 @@ body, .search-bar-input  {
 	font-family: Arial;
 	font-weight: 100;
 }
-.title-container {
-}
 @keyframes fadeInFromBottom {
 	from {
 		opacity: 0;
@@ -56,6 +54,10 @@ body, .search-bar-input  {
 		width: 400px;
 	}
 }
+.back-to-search-container {
+	float: right;
+	margin-right: 20px;
+}
 .back-to-search {
 	text-decoration: none;
 	font-family: Arial;
@@ -65,10 +67,11 @@ body, .search-bar-input  {
 	font-family: Arial;
 }
 .test-card-back {
-	height: 3px;
+	height: 2px;
 	width: 0px;
 	display: block;
 	border-radius: 10px;
+	margin-top: 3px;
 }
 .back-to-search:hover + .test-card-back {
 	animation: widenSmall .5s ease-out forwards;
@@ -78,7 +81,7 @@ body, .search-bar-input  {
 		width: 0px; 
 	}
 	to {
-		width: 120px;
+		width: 130px;
 	}
 }
 .plot-subtitle {
@@ -91,7 +94,9 @@ body, .search-bar-input  {
 ::placeholder {
 	color: #a8a8a8;
 }
-
+.fa-search {
+	color: white;
+}
 .rating {
 	display: inline-block;
 	font-size: 32px;
@@ -172,4 +177,54 @@ body, .search-bar-input  {
 }
 .bottom-table-cell {
 	display: table-cell;
+}
+.percent-bar {
+	width: 500px;
+	height: 30px;
+	padding: 0;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+.inner-percent-bar {
+	border-radius: 5px;
+	height: 30px;
+	overflow: hidden;
+}
+.popular-green {
+	background-color: #118a21;
+}
+.unpopular-red {
+	background-color: #ab0911;
+}
+.popular-dark-green {
+	background-color: #011c02;
+}
+.unpopular-dark-red {
+	background-color: #4f070b;
+}
+.inline {
+	display: inline-block;
+}
+.block {
+	display: block;
+}
+.out-percent-text {
+	float: right;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+.in-percent-text {
+	float: right;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+.episode-percent-text {
+	margin-top: 5px;
+	padding: 3px;
+}
+.right {
+	float: right;
+}
+.left {
+	float: left;
 }
