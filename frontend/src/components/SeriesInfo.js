@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Label, ResponsiveContainer, Tooltip } from 'recharts';
 import ColoredCursor from "./ColoredCursor";
 import CustomTooltip from "./CustomTooltip";
 import tvTestCard from "../media/tvtestcard.png";
@@ -95,12 +95,13 @@ class SeriesInfo extends Component {
       <div className="series-info">
         <a className="back-to-search" href="/search">Back To Search</a>
         <img className="test-card-back" src={tvTestCard}/>
-        <h1 className="text-style series-title">
+        <h3 className="text-style series-title">
           {this.props.info.primary_title + ' '} 
           ({this.props.info.start_year + ' '}
           - 
           {' ' + (this.props.info.end_year !== -1 ? this.props.info.end_year : 'present')})
-        </h1>
+        </h3>
+        <p id="episode-title" className="text-style"></p>
         <div className="top-content-container">
           <div className="episode-top-container">
             <div className="chart-container">
@@ -112,31 +113,55 @@ class SeriesInfo extends Component {
                   <Line 
                     type="step" 
                     dataKey="average_rating" 
-                    stroke="#614d12" 
-                    strokeWidth={0.75}
+                    stroke="white" 
+                    strokeWidth={1.5}
                     dot={false}
                     activeDot={false}
                     connectNulls={false}
                   />
-                  <CartesianGrid stroke="#614d12" strokeDasharray="0 5" />
+                  <CartesianGrid stroke="white" strokeDasharray="0 5" />
                   <XAxis 
                     dataKey="name" 
                     interval={0}
+                    axisLine={false}
                     ticks={this.xTicks(filteredEpisodes)}
-                    label={{ value: 'season number', position: 'bottom' }}
                     padding={{left:20, right:20}}
-                    stroke="#614d12"
-                  />
+                    stroke="white"
+                  >
+                    <Label
+                      value={'season number'}
+                      position={'bottom'}
+                      style={{
+                        fill: 'white',
+                        fontFamily: 'Arial'
+                      }}
+                    />
+                  </XAxis>
                   <YAxis 
                     domain={ydomain} 
-                    stroke="#614d12"
-                    label={{ value: 'episode rating', angle: -90, position: 'insideLeft', offset: 20 }}
-                  />
-                  <ColoredCursor position={{ x: 32, y: -79 }} cursor={{ strokeWidth: '1.75'}} content={
-                    <CustomTooltip 
-                      info={this.props.info} 
-                      filteredEps={filteredEpisodes}
-                    />}
+                    stroke="white"
+                    axisLine={false}
+                  >
+                    <Label
+                      value={'episode rating'} 
+                      angle={-90} 
+                      position={'insideLeft'} 
+                      offset={20}
+                      style={{
+                        fill: 'white',
+                        fontFamily: 'Arial'
+                      }}
+                    />
+                  </YAxis>
+                  <ColoredCursor 
+                    position={{ y: -50 }} 
+                    cursor={{ strokeWidth: '1.75'}} 
+                    isAnimationActive={false}
+                    content={
+                      <CustomTooltip 
+                        info={this.props.info} 
+                        filteredEps={filteredEpisodes}
+                      />}
                   />
                 </LineChart>
               </ResponsiveContainer>

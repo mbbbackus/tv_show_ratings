@@ -1,9 +1,10 @@
 body, .search-bar-input  {
-	background-color: white;
+	background-color: black;
 }
 .text-style {
-	color: #332626;
+	color: white;
 	font-family: Arial;
+	font-weight: 100;
 }
 .title-container {
 }
@@ -33,12 +34,16 @@ body, .search-bar-input  {
 .back-to-search {
 	text-decoration: none;
 	font-family: Arial;
-	color: black;
+}
+.back-to-search:visited {
+	color: white;
+	font-family: Arial;
 }
 .test-card-back {
 	height: 3px;
 	width: 0px;
 	display: block;
+	border-radius: 10px;
 }
 .back-to-search:hover + .test-card-back {
 	animation: widenSmall .5s ease-out forwards;
@@ -68,6 +73,14 @@ body, .search-bar-input  {
 	border: 0;
 	color: #a8a8a8;
 }
+.rating {
+	display: inline-block;
+	font-size: 32px;
+}
+.rating-denominator {
+	color: gray;
+	display: inline-block;
+}
 .search-bar-input:hover, .search-bar-input:focus {
 	border-bottom: 1px solid #a8a8a8;
 }
@@ -87,18 +100,27 @@ body, .search-bar-input  {
 .series-found a:hover {
 	color: #6e5817;
 }
-
 .series-title {
 	margin-left: 40px;
 }
-
+#episode-title {
+	margin-left: 40px;
+}
+.episode-title {
+	font-size: 28px;
+}
+.episode-number {
+	color: gray;
+}
 .custom-tooltip {
 	background-color: hsla(0,0%,0%,0);
 	border-radius: 10px;
 	padding: 1px 10px;
+	margin-left: -60px;
 }
 .tooltip-text {
-	font-family: Arial;
+	font: 18px Arial;
+	color: white;
 }
 .top-content-container {
 	width:100%;
@@ -111,7 +133,7 @@ body, .search-bar-input  {
 	content: "";
 }
 .chart-container {
-	margin-top: 50px;
+	margin-top: 25px;
 	float: left;
 	width: 100%;
 }
