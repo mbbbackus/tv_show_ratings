@@ -1,1 +1,0 @@
-Creating virtualenv tv-ratings-website-VZFGwv2w-py3.8 in /Users/mbackus/Library/Caches/pypoetry/virtualenvs
