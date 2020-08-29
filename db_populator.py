@@ -11,18 +11,36 @@ from datetime import datetime
 import ratings_api
 from ratings_api.models import Series, Episode, EpisodeRating, EpisodeName
 
+import requests
+import gzip
+import shutil
+
+urls = {
+	"title.basics.tsv": "https://datasets.imdbws.com/title.basics.tsv.gz",
+	"title.episode.tsv": "https://datasets.imdbws.com/title.episode.tsv.gz",
+	"title.ratings.tsv": "https://datasets.imdbws.com/title.ratings.tsv.gz"
+}
+
+for url in urls:
+	r = requests.get(urls[url], allow_redirects=True)
+	open('./data/{0}.gz'.format(url), 'wb').write(r.content)
+
+	with gzip.open('./data/{0}.gz'.format(url), 'rb') as f_in:
+	    with open('./data/{0}'.format(url), 'wb') as f_out:
+	        shutil.copyfileobj(f_in, f_out)
+
 
 # janky way to put all my scripts in one file but only run
 # one at a time; i'd use sys.args but i dont wanna rn
 populated = {
-	"series": True,
-	"episodes": True,
-	"names": True,
+	"series": False,
+	"episodes": False,
+	"names": False,
 	"ratings": False
 }
 
 if not populated["series"]:
-	with open("../data/title.basics.tsv") as basics_file:
+	with open("./data/title.basics.tsv") as basics_file:
 		basics_file_lines = csv.reader(basics_file, delimiter="\t")
 
 		#ex. tt0412142;tvSeries;House;House M.D.;0;2004;2012;44;Drama,Mystery
@@ -48,7 +66,7 @@ if not populated["series"]:
 				print("series: ERROR IN ROW", row)
 
 if not populated["episodes"]:
-	with open("../data/title.episode.tsv") as episode_file:
+	with open("./data/title.episode.tsv") as episode_file:
 		episode_reader = csv.reader(episode_file, delimiter="\t")
 
 		now = datetime.now()
@@ -82,7 +100,7 @@ if not populated["episodes"]:
 				now = datetime.now()
 
 if not populated["names"]:
-	with open("../data/title.basics.tsv") as basics_file:
+	with open("./data/title.basics.tsv") as basics_file:
 		basics_file_lines = csv.reader(basics_file, delimiter="\t")
 
 		now = datetime.now()
@@ -108,7 +126,7 @@ if not populated["names"]:
 				now = datetime.now()
 
 if not populated["ratings"]:
-	with open("../data/title.ratings.tsv") as ratings_file:
+	with open("./data/title.ratings.tsv") as ratings_file:
 		ratings_file_lines = csv.reader(ratings_file, delimiter="\t")
 
 		now = datetime.now()
