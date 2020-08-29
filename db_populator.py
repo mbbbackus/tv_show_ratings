@@ -22,8 +22,8 @@ urls = {
 }
 
 new_dir_path = os.path.join(os.getcwd(),"data")
-if not os.path.exists(dir):
-    os.mkdir(dir)
+if not os.path.exists(new_dir_path):
+    os.mkdir(new_dir_path)
 
 for url in urls:
 	r = requests.get(urls[url], allow_redirects=True)
