@@ -21,6 +21,10 @@ urls = {
 	"title.ratings.tsv": "https://datasets.imdbws.com/title.ratings.tsv.gz"
 }
 
+new_dir_path = os.path.join(os.getcwd(),"data")
+if not os.path.exists(dir):
+    os.mkdir(dir)
+
 for url in urls:
 	r = requests.get(urls[url], allow_redirects=True)
 	open('./data/{0}.gz'.format(url), 'wb').write(r.content)
