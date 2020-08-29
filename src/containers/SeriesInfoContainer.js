@@ -62,7 +62,7 @@ class SeriesInfoContainer extends Component {
   }
   loadSeries = () => {
     const series_uuid = this.props.match.params.seriesId;
-    axios.get("http://localhost:8000/api/series/" + series_uuid)
+    axios.get("/api/series/" + series_uuid)
       .then(res => this.setState(this.cleanSeriesInfo(res.data)))
       .catch(err => console.log(err));
   }
