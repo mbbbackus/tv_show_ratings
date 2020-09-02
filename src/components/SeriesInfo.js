@@ -132,11 +132,11 @@ class SeriesInfo extends Component {
                   data={filteredEpisodes}
                 >
                   <Line 
-                    type="step" 
+                    type="linear" 
                     dataKey="average_rating" 
                     stroke="white" 
                     strokeWidth={1.5}
-                    dot={false}
+                    dot={true}
                     activeDot={false}
                     connectNulls={false}
                   />
