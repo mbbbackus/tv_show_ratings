@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE',
-                      'tv_ratings_website.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tv_ratings_website.settings')
 
 import django
 django.setup()
 
+import sys
 import csv
 from datetime import datetime
 import ratings_api
@@ -33,17 +33,7 @@ for url in urls:
 	    with open('./data/{0}'.format(url), 'wb') as f_out:
 	        shutil.copyfileobj(f_in, f_out)
 
-
-# janky way to put all my scripts in one file but only run
-# one at a time; i'd use sys.args but i dont wanna rn
-populated = {
-	"series": False,
-	"episodes": False,
-	"names": False,
-	"ratings": False
-}
-
-if not populated["series"]:
+if "series" in sys.argv:
 	with open("./data/title.basics.tsv") as basics_file:
 		basics_file_lines = csv.reader(basics_file, delimiter="\t")
 
@@ -69,7 +59,7 @@ if not populated["series"]:
 			except:
 				print("series: ERROR IN ROW", row)
 
-if not populated["episodes"]:
+if "episodes" in sys.argv:
 	with open("./data/title.episode.tsv") as episode_file:
 		episode_reader = csv.reader(episode_file, delimiter="\t")
 
@@ -103,7 +93,7 @@ if not populated["episodes"]:
 				print("Episodes added: ", num_episodes)
 				now = datetime.now()
 
-if not populated["names"]:
+if "names" in sys.argv:
 	with open("./data/title.basics.tsv") as basics_file:
 		basics_file_lines = csv.reader(basics_file, delimiter="\t")
 
@@ -129,7 +119,7 @@ if not populated["names"]:
 				print("Episode Names added: ", num_episode_names)
 				now = datetime.now()
 
-if not populated["ratings"]:
+if "ratings" in sys.argv:
 	with open("./data/title.ratings.tsv") as ratings_file:
 		ratings_file_lines = csv.reader(ratings_file, delimiter="\t")
 
