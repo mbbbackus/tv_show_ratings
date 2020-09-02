@@ -81,7 +81,7 @@ if "episodes" in sys.argv:
 				episode_number = -1
 			# try:
 			series = Series.objects.get(id=series_id)
-			series.episode_set.create(
+			series.episodes.create(
 				id=row[0],
 				season_number=season_number,
 				episode_number=episode_number
@@ -108,7 +108,7 @@ if "names" in sys.argv:
 			episode_id = row[0]
 			try:
 				episode = Episode.objects.get(id=episode_id)
-				episode.episodename_set.create(
+				episode.names.create(
 					primary_name=row[2],
 					original_name=row[3]
 				)
@@ -138,7 +138,7 @@ if "ratings" in sys.argv:
 			if is_episode_rating:
 				episode = episodes[0]
 				try:
-					episode.episoderating_set.create(
+					episode.ratings.create(
 						average_rating=float(row[1]),
 						num_votes=int(row[2])
 					)
