@@ -60,6 +60,8 @@ if "series" in sys.argv:
 				print("series: ERROR: {0}, IN ROW".format(str(type(e))), row)
 
 if "episodes" in sys.argv:
+	if "resetdb" in sys.argv:
+		Episode.objects.all().delete()
 	with open("./data/title.episode.tsv") as episode_file:
 		episode_reader = csv.reader(episode_file, delimiter="\t")
 
