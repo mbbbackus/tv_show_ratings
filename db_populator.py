@@ -57,7 +57,7 @@ if "series" in sys.argv:
 				)
 				s.save()
 			except Exception as e:
-				print("series: ERROR: {0}, IN ROW".format(string(type(e))), row)
+				print("series: ERROR: {0}, IN ROW".format(str(type(e))), row)
 
 if "episodes" in sys.argv:
 	with open("./data/title.episode.tsv") as episode_file:
@@ -87,7 +87,7 @@ if "episodes" in sys.argv:
 					episode_number=episode_number
 				)
 			except Exception as e:
-				print("series: ERROR: {0}, IN ROW".format(string(type(e))), row)
+				print("series: ERROR: {0}, IN ROW".format(str(type(e))), row)
 
 			if (datetime.now() - now).seconds > 60:
 				print("Episodes added: ", num_episodes)
@@ -113,7 +113,7 @@ if "names" in sys.argv:
 					original_name=row[3]
 				)
 			except Exception as e:
-				print("series: ERROR: {0}, IN ROW".format(string(type(e))), row)
+				print("series: ERROR: {0}, IN ROW".format(str(type(e))), row)
 
 			if (datetime.now() - now).seconds > 60:
 				print("Episode Names added: ", num_episode_names)
@@ -143,7 +143,7 @@ if "ratings" in sys.argv:
 						num_votes=int(row[2])
 					)
 				except Exception as e:
-					print("series: ERROR: {0}, IN ROW".format(string(type(e))), row)
+					print("series: ERROR: {0}, IN ROW".format(str(type(e))), row)
 
 			if (datetime.now() - now).seconds > 60:
 				print("Episode Ratings added: ", num_episode_ratings)
