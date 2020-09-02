@@ -9,3 +9,4 @@ ratings_api/migrations/__pycache__/
 node_modules/
 yarn.lock
 build/
+yarn-error.log

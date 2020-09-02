@@ -112,7 +112,7 @@ class SeriesInfo extends Component {
       <div className="series-info">
         <div className="back-to-search-container">
           <a className="back-to-search" href="/search">
-            <div class="fa fa-search"></div> Back To Search
+            <div className="fa fa-search"></div> Back To Search
           </a>
           <img className="test-card-back" src={tvTestCard}/>
         </div>
