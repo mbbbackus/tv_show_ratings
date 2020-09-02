@@ -2,14 +2,14 @@ import uuid
 from django.db import models
 
 class Series(models.Model):
-	id = models.CharField(max_length=9, primary_key=True, editable=False)
+	id = models.CharField(max_length=16, primary_key=True, editable=False)
 	primary_title = models.CharField(max_length=200)
 	original_title = models.CharField(max_length=200)
 	start_year = models.IntegerField(default=-1)
 	end_year = models.IntegerField(default=-1) 
 
 class Episode(models.Model):
-	id = models.CharField(max_length=9, primary_key=True, editable=False)
+	id = models.CharField(max_length=16, primary_key=True, editable=False)
 	series = models.ForeignKey(Series, on_delete=models.CASCADE, related_name='episodes')
 	season_number = models.IntegerField(default=-1)
 	episode_number = models.IntegerField(default=-1)
