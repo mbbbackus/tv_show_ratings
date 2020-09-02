@@ -43,9 +43,9 @@ if "series" in sys.argv:
 				continue
 			start_year = row[5]
 			end_year = row[6]
-			if start_year == '\\N':
+			if start_year == '\\N' or start_year == '\\\\N':
 				start_year = -1
-			if end_year == '\\N':
+			if end_year == '\\N' or end_year == '\\\\N':
 				end_year = -1
 			try:
 				s = Series(
@@ -75,9 +75,9 @@ if "episodes" in sys.argv:
 			series_id = row[1]
 			season_number = row[2]
 			episode_number = row[3]
-			if season_number == '\\N':
+			if season_number == '\\N' or season_number == '\\\\N':
 				season_number = -1
-			if episode_number == '\\N':
+			if episode_number == '\\N' or episode_number == '\\\\N':
 				episode_number = -1
 			try:
 				series = Series.objects.get(id=series_id)
