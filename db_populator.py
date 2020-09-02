@@ -47,17 +47,17 @@ if "series" in sys.argv:
 				start_year = -1
 			if end_year == '\\N' or end_year == '\\\\N':
 				end_year = -1
-			# try:
-			s = Series(
-				id=row[0], 
-				primary_title=row[2], 
-				original_title=row[3], 
-				start_year=start_year, 
-				end_year=end_year
-			)
-			s.save()
-			# except Exception as e:
-			# 	print("series: ERROR: {0}, IN ROW".format(str(type(e))), row)
+			try:
+				s = Series(
+					id=row[0], 
+					primary_title=row[2], 
+					original_title=row[3], 
+					start_year=start_year, 
+					end_year=end_year
+				)
+				s.save()
+			except Exception as e:
+				print("series: ERROR: {0}, IN ROW".format(str(type(e))), row)
 
 if "episodes" in sys.argv:
 	with open("./data/title.episode.tsv") as episode_file:
