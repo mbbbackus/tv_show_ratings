@@ -72,6 +72,11 @@ if "episodes" in sys.argv:
 				continue
 			num_episodes += 1
 
+			episode_id = row[0]
+			try:
+				Episode.objects.get(id=episode_id)
+			except:
+				continue
 			series_id = row[1]
 			season_number = row[2]
 			episode_number = row[3]
@@ -82,7 +87,7 @@ if "episodes" in sys.argv:
 			try:
 				series = Series.objects.get(id=series_id)
 				series.episodes.create(
-					id=row[0],
+					id=episode_id,
 					season_number=season_number,
 					episode_number=episode_number
 				)
