@@ -59,6 +59,7 @@ body, .search-bar-input  {
 	margin-right: 20px;
 }
 .back-to-search {
+	color: white;
 	text-decoration: none;
 	font-family: Arial;
 }
