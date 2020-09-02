@@ -79,15 +79,15 @@ if "episodes" in sys.argv:
 				season_number = -1
 			if episode_number == '\\N' or episode_number == '\\\\N':
 				episode_number = -1
-			try:
-				series = Series.objects.get(id=series_id)
-				series.episode_set.create(
-					id=row[0],
-					season_number=season_number,
-					episode_number=episode_number
-				)
-			except Exception as e:
-				print("series: ERROR: {0}, IN ROW".format(str(type(e))), row)
+			# try:
+			series = Series.objects.get(id=series_id)
+			series.episode_set.create(
+				id=row[0],
+				season_number=season_number,
+				episode_number=episode_number
+			)
+			# except Exception as e:
+			# 	print("series: ERROR: {0}, IN ROW".format(str(type(e))), row)
 
 			if (datetime.now() - now).seconds > 60:
 				print("Episodes added: ", num_episodes)
