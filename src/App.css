@@ -6,22 +6,11 @@ body, .search-bar-input  {
 	font-family: Arial;
 	font-weight: 100;
 }
-@keyframes fadeInFromBottom {
-	from {
-		opacity: 0;
-		padding-top: 100px;
-	}
-	to {
-		opacity: 100%;
-		padding-top: 10px;
-	}
-}
 .search-bar-container {
 	padding-top: 10px;
 	width: 400px;
 	margin: auto;
 	position:relative;
-	animation: fadeInFromBottom 1s ease-in-out;
 }
 .plot-title {
 	margin-top: 33%;

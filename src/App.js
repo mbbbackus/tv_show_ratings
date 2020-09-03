@@ -8,7 +8,7 @@ function App() {
   return (
     <main className="App">
       <Router>
-        <Route path="/search/" component={SearchBarContainer} />
+        <Route exact path="/" component={SearchBarContainer} />
         <Route path="/series/:seriesId" component={SeriesInfoContainer} />
       </Router>
     </main>
