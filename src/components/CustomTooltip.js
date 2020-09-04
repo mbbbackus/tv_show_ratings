@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-const CustomTooltip = ({ active, payload, label, info, filteredEps }) => {
+const CustomTooltip = ({ active, payload, label, info, filteredEps, hidden }) => {
   let episode = {};
   for (let i = 0; i < info.episodes.length; i++) {
     // TODO: find episode by id, not name
@@ -12,8 +12,22 @@ const CustomTooltip = ({ active, payload, label, info, filteredEps }) => {
       break;
     }
   }
+  if (!active) {
+    let isLarge = document.getElementById("series-title").classList.contains("large-title");
+    if (!isLarge) {
+      document.getElementById("series-title").classList.remove("small-title");
+      document.getElementById("series-title").classList.add("large-title");
+    }
+    document.getElementById("episode-title-container").innerHTML = "";
+    return "";
+  }
   if (active && payload != null) {
-    document.getElementById("episode-title").innerHTML = `
+    let isSmall = document.getElementById("series-title").classList.contains("small-title");
+    if (!isSmall) {
+      document.getElementById("series-title").classList.remove("large-title");
+      document.getElementById("series-title").classList.add("small-title");
+    }
+    document.getElementById("episode-title-container").innerHTML = `
       <span class="episode-title">
         "${episode.name}" 
       </span>

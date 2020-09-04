@@ -10,6 +10,11 @@ class SeriesInfo extends Component {
     this.renderEpisodes = this.renderEpisodes.bind(this);
     this.filterEpisodes = this.filterEpisodes.bind(this);
     this.xTicks = this.xTicks.bind(this);
+    this.chartIsActive = this.chartIsActive.bind(this);
+    this.chartIsNotActive = this.chartIsNotActive.bind(this);
+    this.state = {
+      chartIsActive: false,
+    }
   }
   xTicks(eps) {
     let ticks = [];
@@ -81,6 +86,16 @@ class SeriesInfo extends Component {
       );
     }
   }
+  chartIsActive() {
+    if (!this.state.chartIsActive){
+      this.setState({chartIsActive: true, titleClass: ""})
+    }
+  }
+  chartIsNotActive() {
+    if (this.state.chartIsActive){
+      this.setState({chartIsActive: false, titleClass: "large-title"})
+    }
+  }
   filterEpisodes(episodes) {
     let newEps = [];
     let ymin = 10;
@@ -116,13 +131,15 @@ class SeriesInfo extends Component {
           </a>
           <img className="test-card-back" src={tvTestCard}/>
         </div>
-        <h3 className="text-style series-title">
-          {this.props.info.primary_title + ' '} 
-          ({this.props.info.start_year + ' '}
-          - 
-          {' ' + (this.props.info.end_year !== -1 ? this.props.info.end_year : 'present')})
-        </h3>
-        <p id="episode-title" className="text-style"></p>
+        <div className="title-container">
+          <h3 id="series-title" className="text-style series-title large-title">
+            {this.props.info.primary_title + ' '} 
+            ({this.props.info.start_year + ' '}
+            - 
+            {' ' + (this.props.info.end_year !== -1 ? this.props.info.end_year : 'present')})
+          </h3>
+          <p id="episode-title-container" className="text-style episode-title-container"></p>
+        </div>
         <div className="top-content-container">
           <div className="episode-top-container">
             <div className="chart-container">
@@ -130,6 +147,8 @@ class SeriesInfo extends Component {
                 <LineChart 
                   margin={{bottom: 25, right: 25, left: -15}} 
                   data={filteredEpisodes}
+                  onMouseLeave={this.chartIsNotActive}
+                  onMouseMove={this.chartIsActive}
                 >
                   <Line 
                     type="linear" 
@@ -193,6 +212,7 @@ class SeriesInfo extends Component {
                       <CustomTooltip 
                         info={this.props.info} 
                         filteredEps={filteredEpisodes}
+                        hidden={!this.state.chartIsActive}
                       />}
                   />
                 </LineChart>

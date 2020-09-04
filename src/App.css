@@ -113,11 +113,42 @@ body, .search-bar-input  {
 .series-title {
 	margin-left: 40px;
 }
-#episode-title {
+@keyframes shrinkTitle {
+	from {
+		font-size: 48px; 
+	}
+	to {
+		font-size: 20px;
+	}
+}
+@keyframes growTitle {
+	from {
+		font-size: 20px; 
+	}
+	to {
+		font-size: 48px;
+	}
+}
+.large-title {
+	margin-top: 20px;
+	font-size: 48px;
+	animation: growTitle .2s ease-in-out forwards;
+}
+.small-title {
+	margin-top: 20px;
+	font-size: 20px;
+	animation: shrinkTitle .2s ease-in-out forwards;
+}
+.title-container {
+	height: 120px;
+}
+.episode-title-container {
 	margin-left: 40px;
+	margin-top: -10px;
+	margin-bottom: 10px;
 }
 .episode-title {
-	font-size: 28px;
+	font-size: 36px;
 }
 .episode-number {
 	color: gray;
