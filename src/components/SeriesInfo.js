@@ -131,123 +131,131 @@ class SeriesInfo extends Component {
     let filteredEpisodes = res.filteredEpisodes;
     return (
       <div className="series-info">
-        <div className="back-to-search-container">
-          <a className="back-to-search" href="/">
-            <div className="fa fa-search"></div> Back To Search
-          </a>
-          <img className="test-card-back" src={tvTestCard}/>
-        </div>
-        <div className="title-container">
-          <h3 id="series-title" className="text-style series-title large-title">
-            {this.props.info.primary_title + ' '} 
-            ({this.props.info.start_year + ' '}
-            - 
-            {' ' + (this.props.info.end_year !== -1 ? this.props.info.end_year : 'present')})
-          </h3>
-          <p id="episode-title-container" className="text-style episode-title-container"></p>
-        </div>
-        <div className="top-content-container">
-          <div className="episode-top-container">
-            <div className="chart-container">
-              <ResponsiveContainer height={360} width='100%'>
-                <LineChart 
-                  margin={{bottom: 25, right: 25, left: 0}} 
-                  data={filteredEpisodes}
-                  onMouseLeave={this.chartIsNotActive}
-                  onMouseMove={this.chartIsActive}
-                >
-                  <Line 
-                    type="linear" 
-                    dataKey="average_rating" 
-                    stroke="white" 
-                    strokeWidth={1.5}
-                    dot={false}
-                    activeDot={false}
-                    connectNulls={false}
-                  />
-                  <CartesianGrid stroke="white" strokeDasharray="0 5" />
-                  <XAxis 
-                    dataKey="name" 
-                    interval={0}
-                    ticks={this.xTicks(filteredEpisodes)}
-                    padding={{left:20, right:20}}
-                    stroke="white"
-                    style={{
-                      fill: 'white',
-                      fontFamily: 'Arial'
-                    }}
-                  >
-                    <Label
-                      value={'season number'}
-                      position={'bottom'}
-                      style={{
-                        fill: 'white',
-                        fontFamily: 'Arial'
-                      }}
-                    />
-                  </XAxis>
-                  <YAxis 
-                    domain={ydomain} 
-                    stroke="white"
-                    style={{
-                      fill: 'white',
-                      fontFamily: 'Arial'
-                    }}
-                  >
-                    <Label
-                      value={'episode rating'} 
-                      angle={-90} 
-                      position={'insideLeft'} 
-                      offset={10}
-                      style={{
-                        fill: 'white',
-                        fontFamily: 'Arial'
-                      }}
-                    />
-                  </YAxis>
-                  {(filteredEpisodes.length > 0 && false) &&
-                    <ReferenceLine x={filteredEpisodes[0].name} stroke="green">
-                      <Label
-                        value={filteredEpisodes[0].num_votes} 
-                        position={{ y: -50 }}
-                        offset={400}
+        {this.props.info.primary_title === undefined ?
+          <div className="loading-test-card">
+            <img className="loading-img" src={tvTestCard}/>
+          </div>
+          :
+          <div className="loaded-content-container">
+            <div className="back-to-search-container">
+              <a className="back-to-search" href="/">
+                <div className="fa fa-search"></div> Back To Search
+              </a>
+              <img className="test-card-back" src={tvTestCard}/>
+            </div>
+            <div className="title-container">
+              <h3 id="series-title" className="text-style series-title large-title">
+                {this.props.info.primary_title + ' '} 
+                ({this.props.info.start_year + ' '}
+                - 
+                {' ' + (this.props.info.end_year !== -1 ? this.props.info.end_year : 'present')})
+              </h3>
+              <p id="episode-title-container" className="text-style episode-title-container"></p>
+            </div>
+            <div className="top-content-container">
+              <div className="episode-top-container">
+                <div className="chart-container">
+                  <ResponsiveContainer height={360} width='100%'>
+                    <LineChart 
+                      margin={{bottom: 25, right: 25, left: 0}} 
+                      data={filteredEpisodes}
+                      onMouseLeave={this.chartIsNotActive}
+                      onMouseMove={this.chartIsActive}
+                    >
+                      <Line 
+                        type="linear" 
+                        dataKey="average_rating" 
+                        stroke="white" 
+                        strokeWidth={1.5}
+                        dot={false}
+                        activeDot={false}
+                        connectNulls={false}
+                      />
+                      <CartesianGrid stroke="white" strokeDasharray="0 5" />
+                      <XAxis 
+                        dataKey="name" 
+                        interval={0}
+                        ticks={this.xTicks(filteredEpisodes)}
+                        padding={{left:20, right:20}}
+                        stroke="white"
                         style={{
                           fill: 'white',
                           fontFamily: 'Arial'
                         }}
+                      >
+                        <Label
+                          value={'season number'}
+                          position={'bottom'}
+                          style={{
+                            fill: 'white',
+                            fontFamily: 'Arial'
+                          }}
+                        />
+                      </XAxis>
+                      <YAxis 
+                        domain={ydomain} 
+                        stroke="white"
+                        style={{
+                          fill: 'white',
+                          fontFamily: 'Arial'
+                        }}
+                      >
+                        <Label
+                          value={'episode rating'} 
+                          angle={-90} 
+                          position={'insideLeft'} 
+                          offset={10}
+                          style={{
+                            fill: 'white',
+                            fontFamily: 'Arial'
+                          }}
+                        />
+                      </YAxis>
+                      {(filteredEpisodes.length > 0 && false) &&
+                        <ReferenceLine x={filteredEpisodes[0].name} stroke="green">
+                          <Label
+                            value={filteredEpisodes[0].num_votes} 
+                            position={{ y: -50 }}
+                            offset={400}
+                            style={{
+                              fill: 'white',
+                              fontFamily: 'Arial'
+                            }}
+                          />
+                        </ReferenceLine>
+                      }
+                      <ColoredCursor 
+                        position={{ y: -50 }} 
+                        cursor={{ strokeWidth: '1.75'}} 
+                        isAnimationActive={false}
+                        content={
+                          <CustomTooltip 
+                            info={this.props.info} 
+                            filteredEps={filteredEpisodes}
+                            hidden={!this.state.chartIsActive}
+                          />}
                       />
-                    </ReferenceLine>
-                  }
-                  <ColoredCursor 
-                    position={{ y: -50 }} 
-                    cursor={{ strokeWidth: '1.75'}} 
-                    isAnimationActive={false}
-                    content={
-                      <CustomTooltip 
-                        info={this.props.info} 
-                        filteredEps={filteredEpisodes}
-                        hidden={!this.state.chartIsActive}
-                      />}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        </div>
-        <div className="bottom-table-container"> 
-          <div className="bottom-table-body">
-            <div className="bottom-table-row">
-              <div className="bottom-table-cell inline">
-                <h3 className="text-style">Popular Episodes</h3>
-              </div>
-              <div className="bottom-table-cell inline right">
-                <h3 className="text-style">Unpopular Episodes</h3>
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
               </div>
             </div>
-            {this.renderEpisodes()}
-            
+            <div className="bottom-table-container"> 
+              <div className="bottom-table-body">
+                <div className="bottom-table-row">
+                  <div className="bottom-table-cell inline">
+                    <h3 className="text-style">Popular Episodes</h3>
+                  </div>
+                  <div className="bottom-table-cell inline right">
+                    <h3 className="text-style">Unpopular Episodes</h3>
+                  </div>
+                </div>
+                {this.renderEpisodes()}
+                
+              </div>
+            </div>
           </div>
-        </div>
+        }
       </div>
     );
   }
