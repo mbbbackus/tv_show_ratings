@@ -140,7 +140,7 @@ body, .search-bar-input  {
 	animation: shrinkTitle .2s ease-in-out forwards;
 }
 .title-container {
-	height: 120px;
+	height: 105px;
 }
 .episode-title-container {
 	margin-left: 40px;
@@ -200,15 +200,14 @@ body, .search-bar-input  {
 	display: table-cell;
 }
 .percent-bar {
-	width: 500px;
-	height: 30px;
+	height: 25px;
 	padding: 0;
 	border-radius: 5px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 .inner-percent-bar {
 	border-radius: 5px;
-	height: 30px;
+	height: 25px;
 	overflow: hidden;
 }
 .popular-green {
@@ -231,17 +230,19 @@ body, .search-bar-input  {
 }
 .out-percent-text {
 	float: right;
-	margin-top: 10px;
-	margin-right: 10px;
+	margin-top: 5px;
+	margin-right: 5px;
 }
 .in-percent-text {
 	float: right;
-	margin-top: 10px;
+	margin-top: 5px;
 	margin-right: 10px;
 }
 .episode-percent-text {
-	margin-top: 5px;
+	margin-top: 2px;
+	margin-left: 2px;
 	padding: 3px;
+	font-size: 14px;
 }
 .right {
 	float: right;

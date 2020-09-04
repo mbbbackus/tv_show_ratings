@@ -35,15 +35,18 @@ class SeriesInfo extends Component {
     episodeList.sort(this.props.compareRating);
     let popEpisodeList = episodeList.splice(len-5, len-1).reverse();
     let unPopEpisodeList = episodeList.splice(0,5);
-    let unratedEpisodes = this.props.unratedEpisodes
-
+    let unratedEpisodes = this.props.unratedEpisodes;
+    let percentBarWidth = (window.innerWidth - 150)/ 2;
     return popEpisodeList.map((episode,i) => (
       <div className="bottom-table-row" key={episode.id}>
         <div className="bottom-table-cell inline">
-          <div className="percent-bar popular-dark-green ">
+          <div 
+            className="percent-bar popular-dark-green"
+            style={{"width": `${percentBarWidth}px`}}
+          >
             <div 
               className="inner-percent-bar popular-green" 
-              style={{"width": `${episode.average_rating * 50}px`}}
+              style={{"width": `${(episode.average_rating / 10) * (percentBarWidth)}px`}}
             >
               <p className="text-style episode-percent-text inline">
                 S{episode.season_number} E{episode.episode_number}, "{episode.name}" 
@@ -53,10 +56,13 @@ class SeriesInfo extends Component {
           </div>
         </div>
         <div className="bottom-table-cell inline right">
-          <div className="percent-bar unpopular-dark-red">
-            <div 
+          <div 
+            className="percent-bar unpopular-dark-red"
+            style={{"width": `${percentBarWidth}px`}}
+          >
+          <div 
               className="inner-percent-bar unpopular-red" 
-              style={{"width": `${unPopEpisodeList[i].average_rating * 50}px`, "display": "inline-block"}}
+              style={{"width": `${(unPopEpisodeList[i].average_rating / 10) * (percentBarWidth)}px`, "display": "inline-block"}}
             >
               <p className="text-style episode-percent-text">
                 S{unPopEpisodeList[i].season_number} E{unPopEpisodeList[i].episode_number}, "{unPopEpisodeList[i].name}"
@@ -143,9 +149,9 @@ class SeriesInfo extends Component {
         <div className="top-content-container">
           <div className="episode-top-container">
             <div className="chart-container">
-              <ResponsiveContainer height={420} width='100%'>
+              <ResponsiveContainer height={360} width='100%'>
                 <LineChart 
-                  margin={{bottom: 25, right: 25, left: -15}} 
+                  margin={{bottom: 25, right: 25, left: 0}} 
                   data={filteredEpisodes}
                   onMouseLeave={this.chartIsNotActive}
                   onMouseMove={this.chartIsActive}
@@ -155,7 +161,7 @@ class SeriesInfo extends Component {
                     dataKey="average_rating" 
                     stroke="white" 
                     strokeWidth={1.5}
-                    dot={true}
+                    dot={false}
                     activeDot={false}
                     connectNulls={false}
                   />
@@ -166,6 +172,10 @@ class SeriesInfo extends Component {
                     ticks={this.xTicks(filteredEpisodes)}
                     padding={{left:20, right:20}}
                     stroke="white"
+                    style={{
+                      fill: 'white',
+                      fontFamily: 'Arial'
+                    }}
                   >
                     <Label
                       value={'season number'}
@@ -179,12 +189,16 @@ class SeriesInfo extends Component {
                   <YAxis 
                     domain={ydomain} 
                     stroke="white"
+                    style={{
+                      fill: 'white',
+                      fontFamily: 'Arial'
+                    }}
                   >
                     <Label
                       value={'episode rating'} 
                       angle={-90} 
                       position={'insideLeft'} 
-                      offset={20}
+                      offset={10}
                       style={{
                         fill: 'white',
                         fontFamily: 'Arial'
