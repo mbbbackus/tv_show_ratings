@@ -273,3 +273,41 @@ body, .search-bar-input  {
 .left {
 	float: left;
 }
+
+@media only screen and (max-width: 400px) {
+	@keyframes shrinkTitle {
+		from {
+			font-size: 28px; 
+		}
+		to {
+			font-size: 16px;
+		}
+	}
+	@keyframes growTitle {
+		from {
+			font-size: 16px; 
+		}
+		to {
+			font-size: 28px;
+		}
+	}
+	.title-container {
+		height: 140px;
+	}
+	.large-title {
+		margin-top: 20px;
+		font-size: 28px;
+		animation: growTitle .2s ease-in-out forwards;
+	}
+	.small-title {
+		margin-top: 20px;
+		font-size: 16px;
+		animation: shrinkTitle .2s ease-in-out forwards;
+	}
+	.episode-title {
+		font-size: 24px;
+	}
+	.episode-list-title {
+		font-size: 15px;
+	}
+}

@@ -244,10 +244,10 @@ class SeriesInfo extends Component {
               <div className="bottom-table-body">
                 <div className="bottom-table-row">
                   <div className="bottom-table-cell inline">
-                    <h3 className="text-style">Popular Episodes</h3>
+                    <h3 className="text-style episode-list-title">Popular Episodes</h3>
                   </div>
                   <div className="bottom-table-cell inline right">
-                    <h3 className="text-style">Unpopular Episodes</h3>
+                    <h3 className="text-style episode-list-title">Unpopular Episodes</h3>
                   </div>
                 </div>
                 {this.renderEpisodes()}
