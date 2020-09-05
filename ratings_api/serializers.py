@@ -45,6 +45,7 @@ class SeriesSerializer(serializers.ModelSerializer):
 			'id', 
 			'primary_title', 
 			'original_title', 
+			'popularity',
 			'start_year', 
 			'end_year',
 			'episodes',
@@ -58,6 +59,7 @@ class SeriesSearchSerializer(serializers.ModelSerializer):
 			'id', 
 			'primary_title', 
 			'original_title', 
+			'popularity',
 			'start_year', 
 			'end_year',
 		)

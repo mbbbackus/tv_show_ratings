@@ -8,7 +8,6 @@ django.setup()
 import sys
 import csv
 from datetime import datetime
-import ratings_api
 from ratings_api.models import Series, Episode, EpisodeRating, EpisodeName
 
 import requests
