@@ -35,6 +35,8 @@ class Actor(models.Model):
 	birth_year = models.IntegerField(default=-1)
 	death_year = models.IntegerField(default=-1)
 	primary_profession = models.CharField(max_length=200)
+	known_for = models.CharField(max_length=200, blank=True) #convert arrays to json strings
+
 
 class Principal(models.Model): #principal means like a main participant/contributor
 	title = models.ForeignKey(Episode, on_delete=models.CASCADE, related_name='principals') #tt type

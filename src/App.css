@@ -232,6 +232,7 @@ body, .search-bar-input  {
 	border-radius: 5px;
 	height: 25px;
 	overflow: hidden;
+	white-space: nowrap;
 }
 .popular-green {
 	background-color: #118a21;

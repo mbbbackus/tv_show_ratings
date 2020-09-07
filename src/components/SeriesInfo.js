@@ -48,9 +48,12 @@ class SeriesInfo extends Component {
               className="inner-percent-bar popular-green" 
               style={{"width": `${(episode.average_rating / 10) * (percentBarWidth)}px`}}
             >
-              <p className="text-style episode-percent-text inline">
+              <span 
+                title={episode.name} 
+                className="text-style episode-percent-text inline"
+              >
                 S{episode.season_number} E{episode.episode_number}, "{episode.name}" 
-              </p>
+              </span>
               <p className="inline in-percent-text text-style">{episode.average_rating}</p>
             </div>
           </div>
@@ -64,9 +67,12 @@ class SeriesInfo extends Component {
               className="inner-percent-bar unpopular-red" 
               style={{"width": `${(unPopEpisodeList[i].average_rating / 10) * (percentBarWidth)}px`, "display": "inline-block"}}
             >
-              <p className="text-style episode-percent-text">
+              <span
+                title={unPopEpisodeList[i].name}
+                className="text-style episode-percent-text"
+              >
                 S{unPopEpisodeList[i].season_number} E{unPopEpisodeList[i].episode_number}, "{unPopEpisodeList[i].name}"
-              </p>
+              </span>
             </div>
             <p className="inline text-style out-percent-text">{unPopEpisodeList[i].average_rating}</p>
           </div>

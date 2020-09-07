@@ -1,8 +1,7 @@
 .DS_Store
-/data/title.basics.tsv
-/data/title.episode.tsv
-/data/title.ratings.tsv
+/data/*
 db.sqlite3
+db.sqlite3-journal
 tv_ratings_website/__pycache__/
 ratings_api/__pycache__/
 ratings_api/migrations/__pycache__/
