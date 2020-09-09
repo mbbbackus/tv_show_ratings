@@ -32,12 +32,23 @@ body, .search-bar-input  {
 	width: 0px;
 	/*animation: widenBig 2s ease-in-out 0s 1;*/
 }
-.search-bar-input:focus + .tv-test-card {
-	animation: widenBig .5s ease-out forwards;
+.search-bar-input:hover + .tv-test-card {
+	animation: widenBig .2s ease-out forwards;
 }
 @keyframes widenBig {
 	from {
 		width: 0px; 
+	}
+	to {
+		width: 400px;
+	}
+}
+.search-bar-input:focus + .tv-test-card {
+	animation: widen .5s ease-out forwards;
+}
+@keyframes widen {
+	from {
+		width: 400px; 
 	}
 	to {
 		width: 400px;
