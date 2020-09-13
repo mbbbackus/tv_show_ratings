@@ -1,6 +1,9 @@
 import uuid
 from django.db import models
 
+# class Cast(models.Model):
+# 	actor = models.CharField(max_length=200)
+
 class Series(models.Model):
 	id = models.CharField(max_length=16, primary_key=True, editable=False) #tt type
 	primary_title = models.CharField(max_length=200)

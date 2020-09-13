@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import filters, generics, viewsets, mixins
 from .models import Series
-from .serializers import SeriesSerializer, SeriesSearchSerializer
+from .serializers import SeriesSerializer, SeriesSearchSerializer#, CastSerializer
 
 # class SeriesSearchView(viewsets.ModelViewSet):
 # Some shows get better, more specific search results than others
@@ -30,3 +30,10 @@ class SeriesSearchByPrimaryTitleView(SeriesSearchView):
 class SeriesView(viewsets.ModelViewSet):
     serializer_class = SeriesSerializer
     queryset = Series.objects.all()
+
+# class CastView(viewsets.ModelViewSet):
+#     queryset = []
+#     serializer_class = CastSerializer
+
+#     def get_object(self):
+#         return {"actor": str(self.kwargs)}

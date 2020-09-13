@@ -1,6 +1,13 @@
 from rest_framework import serializers
-from .models import Series, Episode, EpisodeName, EpisodeRating
+from .models import Series, Episode, EpisodeName, EpisodeRating#, Cast
 
+# class CastSerializer(serializers.ModelSerializer):
+# 	actor = serializers.CharField(read_only=True)
+# 	class Meta:
+# 		model = Cast
+# 		fields = (
+# 			'actor',
+# 		)
 
 class EpisodeRatingSerializer(serializers.ModelSerializer):
 	average_rating = serializers.FloatField(read_only=True)

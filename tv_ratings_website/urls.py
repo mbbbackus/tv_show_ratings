@@ -10,6 +10,7 @@ router = routers.DefaultRouter()
 router.register(r'series', views.SeriesView, 'series')
 router.register(r'series_by_original_title', views.SeriesSearchByOriginalTitleView, 'series_original_title')
 router.register(r'series_by_primary_title', views.SeriesSearchByPrimaryTitleView, 'series_primary_title')
+# router.register(r'cast', views.CastView, 'cast')
 
 
 urlpatterns = [
