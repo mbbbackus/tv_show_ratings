@@ -1,9 +1,6 @@
 import uuid
 from django.db import models
 
-# class Cast(models.Model):
-# 	actor = models.CharField(max_length=200)
-
 class Series(models.Model):
 	id = models.CharField(max_length=16, primary_key=True, editable=False) #tt type
 	primary_title = models.CharField(max_length=200)
@@ -40,12 +37,10 @@ class Actor(models.Model):
 	primary_profession = models.CharField(max_length=200)
 	known_for = models.CharField(max_length=200, blank=True) #convert arrays to json strings
 
-
-class Principal(models.Model): #principal means like a main participant/contributor
-	title = models.ForeignKey(Episode, on_delete=models.CASCADE, related_name='principals') #tt type
+class Appearance(models.Model): 
+	episode = models.ForeignKey(Episode, on_delete=models.CASCADE, related_name='appearances') #tt type
 	ordering = models.IntegerField(default=-1)
-	actor = models.ForeignKey(Actor, on_delete=models.CASCADE, related_name='principals') #nm type
-	category = models.CharField(max_length=200)
+	actor = models.ForeignKey(Actor, on_delete=models.CASCADE, related_name='appearances') #nm type
 	job = models.CharField(max_length=200)
 	characters = models.CharField(max_length=200, blank=True) #convert arrays to json strings
 
