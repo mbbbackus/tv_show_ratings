@@ -8,8 +8,9 @@ class SeriesInfoContainer extends Component {
     this.state = {
       info: {
         episodes: [],
-        unrated: []
-      }
+        unrated: [],
+      },
+      cast: [],
     };
     this.cleanSeriesInfo = this.cleanSeriesInfo.bind(this);
     this.compareRating = this.compareRating.bind(this);
@@ -60,14 +61,41 @@ class SeriesInfoContainer extends Component {
       unrated: unrated
     };
   }
+  cleanCast(cast) {
+    let cleanCast = {};
+    for (let i = 0; i < cast.length; i++) { // 'cast' is actually a list of episodes
+      let episode = cast[i];
+      for (let j = 0; j < episode.appearances.length; j++) {
+        // let actor = episode.appearances[j].characters.replace("\'","\"");
+        // console.log(actor);
+        // actor = JSON.parse(actor)[0];
+        // console.log(episode.appearances[j]);
+        let actor = episode.appearances[j].actor.primary_name;
+        if (!(actor in cleanCast)) {
+          cleanCast[actor] = new Array(cast.length).fill(0);
+        }
+        cleanCast[actor][i] = 1;
+      }
+    }
+    let cleanerCast = Object.keys(cleanCast).map(ep => [ep, cleanCast[ep].reduce((a,b)=>a+b,0), cleanCast[ep]]);
+    cleanerCast.sort((a,b) => b[1] - a[1]);
+    return {cast: cleanerCast};
+  }
   loadSeries = () => {
     const series_uuid = this.props.match.params.seriesId;
     axios.get("/api/series/" + series_uuid)
       .then(res => this.setState(this.cleanSeriesInfo(res.data)))
       .catch(err => console.log(err));
   }
+  loadCast = () => {
+    const series_uuid = this.props.match.params.seriesId;
+    axios.get("/api/cast/" + series_uuid)
+      .then(res => this.setState(this.cleanCast(res.data['episodes'])))
+      .catch(err => console.log(err));
+  }
   componentDidMount() {
     this.loadSeries();
+    this.loadCast();
   }
   render () {
     document.title = "Plot the plot";
@@ -76,6 +104,7 @@ class SeriesInfoContainer extends Component {
     return (
       <SeriesInfo
         info={this.state.info}
+        cast={this.state.cast}
         unratedEpisodes={this.state.unrated}
         compareRating={this.compareRating}
       />

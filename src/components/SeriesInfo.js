@@ -8,6 +8,7 @@ class SeriesInfo extends Component {
   constructor(props) {
     super(props);
     this.renderEpisodes = this.renderEpisodes.bind(this);
+    this.renderCast = this.renderCast.bind(this);
     this.filterEpisodes = this.filterEpisodes.bind(this);
     this.xTicks = this.xTicks.bind(this);
     this.chartIsActive = this.chartIsActive.bind(this);
@@ -78,9 +79,29 @@ class SeriesInfo extends Component {
           </div>
           
         </div>
-        <div className="bottom-table-cell"></div>
+        <div className="bottom-table-cell"></div> 
       </div>
     ));
+  } //                ^^^ WTF THERE'S AN EXTRA CELL EVERY TIME??? WHEN DID I DO THAT??
+  renderCast () {
+    return this.props.cast.map((person, i) => (
+      <div className="bottom-table-row" key={i}>
+        <div className="bottom-table-cell inline text-style name-cell">{person[0]}</div>
+        {person[2].map(inEpisode => {
+          if (inEpisode) {
+            return <div className="bottom-table-cell inline bg-white" 
+            style={{"width": `${(window.innerWidth - 150)/this.props.cast.length}px`}}></div>;
+          }
+          else {
+            return <div className="bottom-table-cell inline bg-black"
+            style={{"width": `${(window.innerWidth - 150)/this.props.cast.length}px`}}></div>;
+          }
+          })
+        }
+        
+      </div>
+    ));
+
   }
   renderUnratedEpisodes () {
     if (!this.props.unratedEpisodes){
@@ -257,7 +278,11 @@ class SeriesInfo extends Component {
                   </div>
                 </div>
                 {this.renderEpisodes()}
-                
+              </div>
+            </div>
+            <div className="bottom-table-container"> 
+              <div className="bottom-table-body">
+                {this.props.cast.length > 0 && this.renderCast()}
               </div>
             </div>
           </div>

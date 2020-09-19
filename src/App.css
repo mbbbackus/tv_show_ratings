@@ -1,6 +1,19 @@
 body, .search-bar-input  {
 	background-color: black;
 }
+
+html{
+    overflow-y:scroll;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .text-style {
 	color: white;
 	font-family: Arial;
@@ -259,6 +272,18 @@ body, .search-bar-input  {
 }
 .inline {
 	display: inline-block;
+}
+.bg-white {
+	background-color: white;
+	height: 10px;
+}
+.bg-black {
+	background-color: black;
+	height: 10px;
+}
+.name-cell {
+	width: 200px;
+	overflow: hidden;
 }
 .block {
 	display: block;
