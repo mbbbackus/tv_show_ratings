@@ -63,16 +63,25 @@ class SeriesInfoContainer extends Component {
   }
   cleanCast(cast) {
     let cleanCast = {};
-    for (let i = 0; i < cast.length; i++) { // 'cast' is actually a list of episodes
-      let episode = cast[i];
+    function compare(a, b) {
+      let aSeason = a.season_number;
+      let bSeason = b.season_number;
+      if (aSeason > bSeason) return 1;
+      if (aSeason < bSeason) return -1;
+      let aEpiNum = a.episode_number;
+      let bEpiNum = b.episode_number;
+      if (aEpiNum > bEpiNum) return 1;
+      if (aEpiNum < bEpiNum) return -1;
+      return 0;
+    }
+    let episodes = cast;
+    episodes.sort(compare);
+    for (let i = 0; i < episodes.length; i++) { // 'cast' is actually a list of episodes
+      let episode = episodes[i];
       for (let j = 0; j < episode.appearances.length; j++) {
-        // let actor = episode.appearances[j].characters.replace("\'","\"");
-        // console.log(actor);
-        // actor = JSON.parse(actor)[0];
-        // console.log(episode.appearances[j]);
         let actor = episode.appearances[j].actor.primary_name;
         if (!(actor in cleanCast)) {
-          cleanCast[actor] = new Array(cast.length).fill(0);
+          cleanCast[actor] = new Array(episodes.length).fill(0);
         }
         cleanCast[actor][i] = 1;
       }

@@ -87,14 +87,14 @@ class SeriesInfo extends Component {
     return this.props.cast.map((person, i) => (
       <div className="bottom-table-row" key={i}>
         <div className="bottom-table-cell inline text-style name-cell">{person[0]}</div>
-        {person[2].map(inEpisode => {
+        {person[2].map((inEpisode, j) => {
           if (inEpisode) {
             return <div className="bottom-table-cell inline bg-white" 
-            style={{"width": `${(window.innerWidth - 150)/this.props.cast.length}px`}}></div>;
+            style={{"width": `${((window.innerWidth-325)/this.props.cast[0][2].length)}px`}}></div>;
           }
           else {
             return <div className="bottom-table-cell inline bg-black"
-            style={{"width": `${(window.innerWidth - 150)/this.props.cast.length}px`}}></div>;
+            style={{"width": `${((window.innerWidth-325)/this.props.cast[0][2].length)}px`}}></div>;
           }
           })
         }
