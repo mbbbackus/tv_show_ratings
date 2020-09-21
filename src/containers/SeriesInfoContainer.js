@@ -82,11 +82,16 @@ class SeriesInfoContainer extends Component {
         let ep = episode.appearances[j];
         let actor = ep.actor.primary_name;
         let character = ep.characters.slice(2,ep.characters.length-2);
-        let k = actor + '/&/' + character;
+        let k = actor + '/&/' + character + '/&/';
         if (!(k in cleanCast)) {
           cleanCast[k] = new Array(episodes.length).fill(0);
         }
-        cleanCast[k][i] = 1;
+        if (episode.episode_number === 1) {
+          cleanCast[k][i] = 2;
+        }
+        else {
+          cleanCast[k][i] = 1;
+        }
       }
     }
     let cleanerCast = Object.keys(cleanCast).map(ep => [ep, cleanCast[ep].reduce((a,b)=>a+b,0), cleanCast[ep]]);

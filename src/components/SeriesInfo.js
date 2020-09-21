@@ -85,24 +85,27 @@ class SeriesInfo extends Component {
   } //                ^^^ WTF THERE'S AN EXTRA CELL EVERY TIME??? WHEN DID I DO THAT??
   renderCast () {
     let cast = this.props.cast.slice(0,15);
+    let classes = "bottom-table-cell inline bg-white ";
     return cast.map((person, i) => (
       <div className="bottom-table-row" key={i}>
         <div className="bottom-table-cell inline text-style name-cell">
-          {person[0].split('/&/')[0]}
+          {person[0].split('/&/')[1]}
         </div>
         {person[2].map((inEpisode, j) => {
           if (inEpisode) {
-            return <div className="bottom-table-cell inline bg-white" 
-            style={{"width": `${((window.innerWidth-525)/cast[0][2].length)}px`}}></div>;
+            return <div className={inEpisode === 2 ? classes + "cell-separated": classes}
+            style={{
+              "width": `${((window.innerWidth-395)/cast[0][2].length)}px`,
+            }}></div>;
           }
           else {
             return <div className="bottom-table-cell inline bg-black"
-            style={{"width": `${((window.innerWidth-525)/cast[0][2].length)}px`}}></div>;
+            style={{"width": `${((window.innerWidth-395)/cast[0][2].length)}px`}}></div>;
           }
           })
         }
-        <div className="bottom-table-cell inline text-style name-cell">
-          {person[0].split('/&/')[1]}
+        <div className="bottom-table-cell inline text-style name-cell right-cell">
+          {person[0].split('/&/')[0]}
         </div>
         
       </div>
@@ -273,6 +276,7 @@ class SeriesInfo extends Component {
                 </div>
               </div>
             </div>
+            {/*
             <div className="bottom-table-container"> 
               <div className="bottom-table-body">
                 <div className="bottom-table-row">
@@ -285,7 +289,7 @@ class SeriesInfo extends Component {
                 </div>
                 {this.renderEpisodes()}
               </div>
-            </div>
+            </div>*/}
             <div className="bottom-table-container"> 
               <div className="bottom-table-body">
                 {this.props.cast.length > 0 && this.renderCast()}

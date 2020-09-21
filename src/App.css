@@ -199,8 +199,9 @@ html {
 }
 .chart-container {
 	margin-top: 25px;
+	margin-left: 110px;
 	float: left;
-	width: 100%;
+	width: calc(100% - 270px);
 }
 .unrated-episode-list {
 	float:right;
@@ -234,7 +235,7 @@ html {
 }
 .bottom-table-container {
 	display: table;
-	width: calc(100% - 100px);
+	width: calc(100% - 50px);
 	margin-left: 35px;
 }
 .bottom-table-body {
@@ -276,17 +277,23 @@ html {
 .bg-white {
 	background-color: white;
 	height: 20px;
-	margin: 10px 0;
+	margin-top: 10px;
+}
+.right-cell {
+	margin-left: 20px;
 }
 .bg-black {
 	background-color: black;
 	height: 20px;
-	margin: 10px 0;
+	margin-top: 10px;
+}
+.cell-separated {
+	margin-left: 1px;
 }
 .name-cell {
-	width: 200px;
+	width: 150px;
 	overflow: hidden;
-	margin: 10px 0;
+	margin-top: 10px;
 }
 .block {
 	display: block;
