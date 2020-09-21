@@ -33,7 +33,11 @@ class SeriesAppearancesView(viewsets.ModelViewSet):
 	def get_object(self): # kinda hacky, using series pks to get list appearances
 		series_ttid = str(self.kwargs['pk'])
 		series = Series.objects.get(id=series_ttid)
-		script_has_run = (len(series.episodes.all()[0].appearances.all()) > 0)
+		script_has_run = False
+		for ep in series.episodes.all():
+			if len(ep.appearances.all()) > 0:
+				script_has_run = True
+				break
 		if not script_has_run:
 			cast_dict = scrape_cast(series_ttid)
 			for nm in cast_dict:

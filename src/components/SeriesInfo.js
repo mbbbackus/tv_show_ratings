@@ -84,20 +84,26 @@ class SeriesInfo extends Component {
     ));
   } //                ^^^ WTF THERE'S AN EXTRA CELL EVERY TIME??? WHEN DID I DO THAT??
   renderCast () {
-    return this.props.cast.map((person, i) => (
+    let cast = this.props.cast.slice(0,15);
+    return cast.map((person, i) => (
       <div className="bottom-table-row" key={i}>
-        <div className="bottom-table-cell inline text-style name-cell">{person[0]}</div>
+        <div className="bottom-table-cell inline text-style name-cell">
+          {person[0].split('/&/')[0]}
+        </div>
         {person[2].map((inEpisode, j) => {
           if (inEpisode) {
             return <div className="bottom-table-cell inline bg-white" 
-            style={{"width": `${((window.innerWidth-325)/this.props.cast[0][2].length)}px`}}></div>;
+            style={{"width": `${((window.innerWidth-525)/cast[0][2].length)}px`}}></div>;
           }
           else {
             return <div className="bottom-table-cell inline bg-black"
-            style={{"width": `${((window.innerWidth-325)/this.props.cast[0][2].length)}px`}}></div>;
+            style={{"width": `${((window.innerWidth-525)/cast[0][2].length)}px`}}></div>;
           }
           })
         }
+        <div className="bottom-table-cell inline text-style name-cell">
+          {person[0].split('/&/')[1]}
+        </div>
         
       </div>
     ));
