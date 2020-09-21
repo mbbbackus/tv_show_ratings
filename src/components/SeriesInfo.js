@@ -84,7 +84,7 @@ class SeriesInfo extends Component {
     ));
   } //                ^^^ WTF THERE'S AN EXTRA CELL EVERY TIME??? WHEN DID I DO THAT??
   renderCast () {
-    let cast = this.props.cast.slice(0,15);
+    let cast = this.props.cast;
     let classes = "bottom-table-cell inline bg-white ";
     return cast.map((person, i) => (
       <div className="bottom-table-row" key={i}>
@@ -290,9 +290,11 @@ class SeriesInfo extends Component {
                 {this.renderEpisodes()}
               </div>
             </div>*/}
-            <div className="bottom-table-container"> 
-              <div className="bottom-table-body">
-                {this.props.cast.length > 0 && this.renderCast()}
+            <div className="bottom-table-container-container">
+              <div className="bottom-table-container"> 
+                <div className="bottom-table-body">
+                  {this.props.cast.length > 0 && this.renderCast()}
+                </div>
               </div>
             </div>
           </div>

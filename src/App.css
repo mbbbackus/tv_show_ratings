@@ -233,6 +233,20 @@ html {
 .get-more-results {
 	margin-top: 5px;
 }
+.bottom-table-container-container {
+	overflow: scroll;
+	height: 250px;
+}
+
+.bottom-table-container-container::-webkit-scrollbar {
+  display: none;
+}
+.bottom-table-container-container {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
 .bottom-table-container {
 	display: table;
 	width: calc(100% - 50px);

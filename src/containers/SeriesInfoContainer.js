@@ -47,7 +47,10 @@ class SeriesInfoContainer extends Component {
 
     let ratedInfo = {...sortedInfo}
     ratedInfo.episodes = [];
-    let unrated = [];
+
+
+    let unrated = []; // CONVERT UNRATED SORTING INTO FUNCTION AND APPLY TO CLEANCAST TO FIX BETTER CALL SAUL SEASON 6
+                      // ALSO SOME SHOWS ARE STILL BROKEN: Mad men and Deep Space 9 for Betty Draper and Cpt. Sisko
     for (let i = 0; i < sortedInfo.episodes.length; i++) {
       if (sortedInfo.episodes[i].average_rating === -1) {
         unrated.push(sortedInfo.episodes[i]);

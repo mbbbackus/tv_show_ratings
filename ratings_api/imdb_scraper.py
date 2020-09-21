@@ -60,6 +60,8 @@ def scrape_cast(ttid):
 			anchor = ep.find_all('a', href=lambda x: x and '/title/tt' in x)[0]
 			outside_text = anchor.next_sibling
 			text_list = outside_text.split('...')
+			if len(text_list) <= 1:
+				continue
 			ep_ttid = anchor.attrs['href'].split("/")[2]
 			ep_name = anchor.text
 			ep_year = text_list[0].strip().replace('\t','').replace('\n','').replace(')','').replace('(','')
