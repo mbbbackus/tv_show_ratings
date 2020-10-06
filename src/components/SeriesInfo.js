@@ -13,6 +13,8 @@ class SeriesInfo extends Component {
     this.xTicks = this.xTicks.bind(this);
     this.chartIsActive = this.chartIsActive.bind(this);
     this.chartIsNotActive = this.chartIsNotActive.bind(this);
+    this.mouseEnterAppearance = this.mouseEnterAppearance.bind(this);
+    this.mouseLeaveAppearance = this.mouseLeaveAppearance.bind(this);
     this.state = {
       chartIsActive: false,
     }
@@ -83,6 +85,10 @@ class SeriesInfo extends Component {
       </div>
     ));
   } //                ^^^ WTF THERE'S AN EXTRA CELL EVERY TIME??? WHEN DID I DO THAT??
+  mouseEnterAppearance (person) {
+  }
+  mouseLeaveAppearance (person) {
+  }
   renderCast () {
     let cast = this.props.cast;
     let classes = "bottom-table-cell inline bg-white ";
@@ -93,10 +99,12 @@ class SeriesInfo extends Component {
         </div>
         {person[2].map((inEpisode, j) => {
           if (inEpisode) {
-            return <div className={inEpisode === 2 ? classes + "cell-separated": classes}
-            style={{
-              "width": `${((window.innerWidth-395)/cast[0][2].length)}px`,
-            }}></div>;
+            return <div 
+                      onMouseEnter={this.mouseEnterAppearance}
+                      onMouseLeave={this.mouseLeaveAppearance}
+                      className={inEpisode === 2 ? classes + "cell-separated": classes}
+                      style={{"width": `${((window.innerWidth-395)/cast[0][2].length)}px`}}>
+                  </div>;
           }
           else {
             return <div className="bottom-table-cell inline bg-black"
@@ -104,6 +112,17 @@ class SeriesInfo extends Component {
           }
           })
         }
+        {/*person[2].map((inEpisode, j) => {
+          if (inEpisode) classes += " bg-white";
+          if (inEpisode === 2) classes += " cell-separated";
+          if (!inEpisode) classes += " bg-black";
+          return (
+            <div 
+              className={classes}
+              style={{"width": `${((window.innerWidth-395)/cast[0][2].length)}px`}}
+            ></div>);
+          })
+        */}
         <div className="bottom-table-cell inline text-style name-cell right-cell">
           {person[0].split('/&/')[0]}
         </div>
@@ -290,7 +309,8 @@ class SeriesInfo extends Component {
                 {this.renderEpisodes()}
               </div>
             </div>*/}
-            <div className="bottom-table-container-container">
+            <div className="bottom-table-container-container" 
+                 style={{"height": `${window.innerHeight-550}px`}}>
               <div className="bottom-table-container"> 
                 <div className="bottom-table-body">
                   {this.props.cast.length > 0 && this.renderCast()}

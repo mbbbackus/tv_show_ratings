@@ -235,7 +235,7 @@ html {
 }
 .bottom-table-container-container {
 	overflow: scroll;
-	height: 250px;
+	/*height: 250px;*/
 }
 
 .bottom-table-container-container::-webkit-scrollbar {
