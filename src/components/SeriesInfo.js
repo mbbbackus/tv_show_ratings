@@ -95,7 +95,7 @@ class SeriesInfo extends Component {
     return cast.map((person, i) => (
       <div className="bottom-table-row" key={i}>
         <div className="bottom-table-cell inline text-style name-cell">
-          {person[0].split('/&/')[1]}
+          {person[3]}
         </div>
         {person[2].map((inEpisode, j) => {
           if (inEpisode) {
@@ -103,7 +103,7 @@ class SeriesInfo extends Component {
                       onMouseEnter={this.mouseEnterAppearance}
                       onMouseLeave={this.mouseLeaveAppearance}
                       className={inEpisode === 2 ? classes + "cell-separated": classes}
-                      style={{"width": `${((window.innerWidth-395)/cast[0][2].length)}px`}}>
+                      style={{"width": `${((window.innerWidth-415)/cast[0][2].length)}px`}}>
                   </div>;
           }
           else {
@@ -124,7 +124,7 @@ class SeriesInfo extends Component {
           })
         */}
         <div className="bottom-table-cell inline text-style name-cell right-cell">
-          {person[0].split('/&/')[0]}
+          {person[0]}
         </div>
         
       </div>

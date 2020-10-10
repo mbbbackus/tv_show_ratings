@@ -85,21 +85,35 @@ class SeriesInfoContainer extends Component {
         let ep = episode.appearances[j];
         let actor = ep.actor.primary_name;
         let character = ep.characters.slice(2,ep.characters.length-2);
-        let k = actor + '/&/' + character + '/&/';
-        if (!(k in cleanCast)) {
-          cleanCast[k] = new Array(episodes.length).fill(0);
+        if (character.includes("uncredited") || character.includes("voice)")) break;
+
+        if (!(actor in cleanCast)) { // on first appearance of an actor
+          let zero_arr = new Array(episodes.length).fill(0)
+          cleanCast[actor] = {
+            appearances: zero_arr,
+            characters: [character]
+          };
         }
+        cleanCast[actor].appearances[i] = 1;
         if (episode.episode_number === 1) {
-          cleanCast[k][i] = 2;
+          cleanCast[actor].appearances[i] += 1; //has nothing to do with relevance but seems negligible
         }
-        else {
-          cleanCast[k][i] = 1;
+        if (cleanCast[actor].characters.indexOf(character) < 0) {
+          cleanCast[actor].characters.push(character);
         }
       }
     }
-    let cleanerCast = Object.keys(cleanCast).map(ep => [ep, cleanCast[ep].reduce((a,b)=>a+b,0), cleanCast[ep]]);
-    cleanerCast.sort((a,b) => b[1] - a[1]);
-    return {cast: cleanerCast};
+    let castMatrix = Object.keys(cleanCast).map(actor => 
+      [
+        actor, //actor name
+        cleanCast[actor].appearances.reduce((a,b)=>a+b,0), //actor relevance in the show
+        cleanCast[actor].appearances, // binary matrix of appearances
+        cleanCast[actor].characters.join(", ") //characters played by actor
+      ]
+    );
+
+    castMatrix.sort((a,b) => b[1] - a[1]);
+    return {cast: castMatrix};
   }
   loadSeries = () => {
     const series_uuid = this.props.match.params.seriesId;
