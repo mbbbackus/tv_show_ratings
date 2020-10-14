@@ -85,7 +85,7 @@ class SeriesInfoContainer extends Component {
         let ep = episode.appearances[j];
         let actor = ep.actor.primary_name;
         let character = ep.characters.slice(2,ep.characters.length-2);
-        if (character.includes("uncredited") || character.includes("voice)")) break;
+        // if (character.includes("uncredited") || character.includes("voice)")) break;
 
         if (!(actor in cleanCast)) { // on first appearance of an actor
           let zero_arr = new Array(episodes.length).fill(0)
@@ -98,7 +98,7 @@ class SeriesInfoContainer extends Component {
         if (episode.episode_number === 1) {
           cleanCast[actor].appearances[i] += 1; //has nothing to do with relevance but seems negligible
         }
-        if (cleanCast[actor].characters.indexOf(character) < 0) {
+        if (cleanCast[actor].characters.indexOf(character) < 0 && !(character.includes("uncredited") || character.includes("voice)"))) {
           cleanCast[actor].characters.push(character);
         }
       }

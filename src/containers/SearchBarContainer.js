@@ -34,16 +34,16 @@ class SearchBarContainer extends Component {
     this.setState({ value: e.target.value });
   };
   getMoreResults () {
-    let offset = this.state.offset;
-    this.setState({ offset: offset + 10 });
     axios.get(
-      `/api/series_by_original_title/?offset=${this.state.offset}&search=${this.state.value}`
+      `/api/series_by_original_title/?offset=${this.state.offset + 10}&search=${this.state.value}`
     ).then(res => this.setState(
       {
         series_found: this.state.series_found.concat(res.data.results), 
         loading: false 
       }
     )).catch(err => console.log(err));
+    let offset = this.state.offset;
+    this.setState({ offset: offset + 10 });
   }
 
   render() {
@@ -53,6 +53,7 @@ class SearchBarContainer extends Component {
         inputValue={this.state.value}
         seriesFound={this.state.series_found}
         getMoreResults={this.getMoreResults}
+        offset={this.state.offset}/*remainder as in, how many series were pulled on top of the current offset*/
       />
     );
   }
