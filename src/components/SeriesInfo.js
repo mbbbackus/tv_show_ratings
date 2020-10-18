@@ -17,6 +17,7 @@ class SeriesInfo extends Component {
     this.mouseLeaveAppearance = this.mouseLeaveAppearance.bind(this);
     this.state = {
       chartIsActive: false,
+      toggleAppearances: true,
     }
   }
   xTicks(eps) {
@@ -36,20 +37,26 @@ class SeriesInfo extends Component {
 
     let episodeList = [...this.props.info.episodes];
     episodeList.sort(this.props.compareRating);
-    let popEpisodeList = episodeList.splice(len-5, len-1).reverse();
-    let unPopEpisodeList = episodeList.splice(0,5);
+    let popEpisodeList = episodeList.reverse();
+    let unPopEpisodeList = episodeList;
     let unratedEpisodes = this.props.unratedEpisodes;
-    let percentBarWidth = (window.innerWidth - 150)/ 2;
+    let percentBarWidth = (window.innerWidth - 270);
     return popEpisodeList.map((episode,i) => (
       <div className="bottom-table-row" key={episode.id}>
         <div className="bottom-table-cell inline">
           <div 
-            className="percent-bar popular-dark-green"
-            style={{"width": `${percentBarWidth}px`}}
+            className="percent-bar"
+            style={{
+                "width": `${percentBarWidth}px`,
+                "background-color": `hsl(${episode.average_rating * 8}, 100%, 5%)`,
+            }}
           >
             <div 
-              className="inner-percent-bar popular-green" 
-              style={{"width": `${(episode.average_rating / 10) * (percentBarWidth)}px`}}
+              className="inner-percent-bar" 
+              style={{
+                  "width": `${(episode.average_rating / 10) * (percentBarWidth)}px`,
+                  "background-color": `hsl(${episode.average_rating * 8}, 100%, 20%)`
+              }}
             >
               <span 
                 title={episode.name} 
@@ -61,6 +68,7 @@ class SeriesInfo extends Component {
             </div>
           </div>
         </div>
+        {/*
         <div className="bottom-table-cell inline right">
           <div 
             className="percent-bar unpopular-dark-red"
@@ -79,8 +87,8 @@ class SeriesInfo extends Component {
             </div>
             <p className="inline text-style out-percent-text">{unPopEpisodeList[i].average_rating}</p>
           </div>
-          
         </div>
+        */}
         <div className="bottom-table-cell"></div> 
       </div>
     ));
@@ -295,20 +303,18 @@ class SeriesInfo extends Component {
                 </div>
               </div>
             </div>
-            {/*
+            {this.state.toggleAppearances ?
             <div className="bottom-table-container"> 
               <div className="bottom-table-body">
                 <div className="bottom-table-row">
                   <div className="bottom-table-cell inline">
                     <h3 className="text-style episode-list-title">Popular Episodes</h3>
                   </div>
-                  <div className="bottom-table-cell inline right">
-                    <h3 className="text-style episode-list-title">Unpopular Episodes</h3>
-                  </div>
                 </div>
                 {this.renderEpisodes()}
               </div>
-            </div>*/}
+            </div>
+            :
             <div className="bottom-table-container-container" 
                  style={{"height": `${window.innerHeight-550}px`}}>
               <div className="bottom-table-container"> 
@@ -317,6 +323,7 @@ class SeriesInfo extends Component {
                 </div>
               </div>
             </div>
+            }
           </div>
         }
       </div>

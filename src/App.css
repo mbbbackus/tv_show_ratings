@@ -242,18 +242,19 @@ html {
   display: none;
 }
 .bottom-table-container-container {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  	-ms-overflow-style: none;  /* IE and Edge */
+  	scrollbar-width: none;  /* Firefox */
 }
 
 
 .bottom-table-container {
 	display: table;
-	width: calc(100% - 50px);
-	margin-left: 35px;
+	margin-right: 110px;
+	margin-left: 110px;
 }
 .bottom-table-body {
 	display: table-row-group;
+	width: calc(100% - 270px);
 }
 .bottom-table-row {
 	display: table-row;
