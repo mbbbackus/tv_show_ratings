@@ -238,23 +238,29 @@ html {
 	/*height: 250px;*/
 }
 
+.ratings-container {
+	margin-right: 150px;
+	margin-left: 180px;
+}
+
+.appearances-container {
+	margin-right: 50px;
+}
+
 .bottom-table-container-container::-webkit-scrollbar {
   display: none;
 }
 .bottom-table-container-container {
   	-ms-overflow-style: none;  /* IE and Edge */
-  	scrollbar-width: none;  /* Firefox */
+	  scrollbar-width: none;  /* Firefox */
 }
-
-
 .bottom-table-container {
 	display: table;
-	margin-right: 110px;
-	margin-left: 110px;
+	margin: auto;
 }
 .bottom-table-body {
 	display: table-row-group;
-	width: calc(100% - 270px);
+	width: calc(100% - 330px);
 }
 .bottom-table-row {
 	display: table-row;
@@ -274,18 +280,6 @@ html {
 	overflow: hidden;
 	white-space: nowrap;
 }
-.popular-green {
-	background-color: #118a21;
-}
-.unpopular-red {
-	background-color: #ab0911;
-}
-.popular-dark-green {
-	background-color: #011c02;
-}
-.unpopular-dark-red {
-	background-color: #4f070b;
-}
 .inline {
 	display: inline-block;
 }
@@ -294,12 +288,15 @@ html {
 	height: 30px;
 	margin-top: 10px;
 }
+.bg-white:hover {
+	background-color: lightgrey;
+}
 .right-cell {
-	margin-left: 20px;
+	margin-left: 10px;
 }
 .bg-black {
 	background-color: black;
-	height: 20px;
+	height: 30px;
 	margin-top: 10px;
 }
 .cell-separated {
@@ -308,7 +305,7 @@ html {
 .name-cell {
 	width: 150px;
 	overflow: hidden;
-	margin-top: 10px;
+	margin-top: 0px;
 }
 .block {
 	display: block;
@@ -334,6 +331,38 @@ html {
 }
 .left {
 	float: left;
+}
+.app-row {
+	margin-left: 15px;
+}
+.toggle-container {
+	display: block;
+	margin: auto;
+	margin-top: 10px;
+	width: calc(100% - 360px);
+}
+
+.toggle {
+	display: inline-block;
+	border: 1px solid white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	width: 50%;
+	height: 24px;
+}
+
+.toggle:hover {
+	cursor: pointer;
+}
+
+.filled {
+	color: black;
+	background-color: white;
+}
+
+.unfilled {
+	color: white;
+	background-color: black;
 }
 
 @media only screen and (max-width: 400px) {

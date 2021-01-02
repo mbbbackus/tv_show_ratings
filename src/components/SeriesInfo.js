@@ -11,6 +11,7 @@ class SeriesInfo extends Component {
     this.renderCast = this.renderCast.bind(this);
     this.filterEpisodes = this.filterEpisodes.bind(this);
     this.xTicks = this.xTicks.bind(this);
+    this.toggleBottom = this.toggleBottom.bind(this);
     this.chartIsActive = this.chartIsActive.bind(this);
     this.chartIsNotActive = this.chartIsNotActive.bind(this);
     this.mouseEnterAppearance = this.mouseEnterAppearance.bind(this);
@@ -19,6 +20,9 @@ class SeriesInfo extends Component {
       chartIsActive: false,
       toggleAppearances: true,
     }
+  }
+  toggleBottom() {
+    this.setState({toggleAppearances: !this.state.toggleAppearances});
   }
   xTicks(eps) {
     let ticks = [];
@@ -40,7 +44,7 @@ class SeriesInfo extends Component {
     let popEpisodeList = episodeList.reverse();
     let unPopEpisodeList = episodeList;
     let unratedEpisodes = this.props.unratedEpisodes;
-    let percentBarWidth = (window.innerWidth - 270);
+    let percentBarWidth = (window.innerWidth - 400);
     return popEpisodeList.map((episode,i) => (
       <div className="bottom-table-row" key={episode.id}>
         <div className="bottom-table-cell inline">
@@ -48,14 +52,14 @@ class SeriesInfo extends Component {
             className="percent-bar"
             style={{
                 "width": `${percentBarWidth}px`,
-                "background-color": `hsl(${episode.average_rating * 8}, 100%, 5%)`,
+                "background-color": `hsl(${(episode.average_rating * 10) - 30}, 100%, 5%)`,
             }}
           >
             <div 
               className="inner-percent-bar" 
               style={{
                   "width": `${(episode.average_rating / 10) * (percentBarWidth)}px`,
-                  "background-color": `hsl(${episode.average_rating * 8}, 100%, 20%)`
+                  "background-color": `hsl(${(episode.average_rating * 10) - 30}, 100%, 20%)`
               }}
             >
               <span 
@@ -105,32 +109,23 @@ class SeriesInfo extends Component {
         <div className="bottom-table-cell inline text-style name-cell">
           {person[3]}
         </div>
-        {person[2].map((inEpisode, j) => {
-          if (inEpisode) {
-            return <div 
-                      onMouseEnter={this.mouseEnterAppearance}
-                      onMouseLeave={this.mouseLeaveAppearance}
-                      className={inEpisode === 2 ? classes + "cell-separated": classes}
-                      style={{"width": `${((window.innerWidth-415)/cast[0][2].length)}px`}}>
-                  </div>;
-          }
-          else {
-            return <div className="bottom-table-cell inline bg-black"
-            style={{"width": `${((window.innerWidth-395)/cast[0][2].length)}px`}}></div>;
-          }
-          })
-        }
-        {/*person[2].map((inEpisode, j) => {
-          if (inEpisode) classes += " bg-white";
-          if (inEpisode === 2) classes += " cell-separated";
-          if (!inEpisode) classes += " bg-black";
-          return (
-            <div 
-              className={classes}
-              style={{"width": `${((window.innerWidth-395)/cast[0][2].length)}px`}}
-            ></div>);
-          })
-        */}
+        <div className="inline app-row">
+          {person[2].map((inEpisode, j) => {
+            if (inEpisode) {
+              return <div 
+                        onMouseEnter={this.mouseEnterAppearance}
+                        onMouseLeave={this.mouseLeaveAppearance}
+                        className={inEpisode === 2 ? classes + "cell-separated": classes}
+                        style={{"width": `${((window.innerWidth-395)/cast[0][2].length)}px`}}>
+                    </div>;
+            }
+            else {
+              return <div className="bottom-table-cell inline bg-black"
+              style={{"width": `${((window.innerWidth-395)/cast[0][2].length)}px`}}></div>;
+            }
+          })}
+        </div>
+        
         <div className="bottom-table-cell inline text-style name-cell right-cell">
           {person[0]}
         </div>
@@ -304,26 +299,38 @@ class SeriesInfo extends Component {
               </div>
             </div>
             {this.state.toggleAppearances ?
-            <div className="bottom-table-container"> 
-              <div className="bottom-table-body">
-                <div className="bottom-table-row">
-                  <div className="bottom-table-cell inline">
-                    <h3 className="text-style episode-list-title">Popular Episodes</h3>
+              <div className="bottom-table-container-container" 
+                   style={{"height": `${window.innerHeight-550}px`}}>
+                <div className="bottom-table-container ratings-container"> 
+                  <div className="bottom-table-body">
+                    {this.renderEpisodes()}
                   </div>
                 </div>
-                {this.renderEpisodes()}
               </div>
-            </div>
             :
-            <div className="bottom-table-container-container" 
-                 style={{"height": `${window.innerHeight-550}px`}}>
-              <div className="bottom-table-container"> 
-                <div className="bottom-table-body">
-                  {this.props.cast.length > 0 && this.renderCast()}
+              <div className="bottom-table-container-container" 
+                   style={{"height": `${window.innerHeight-550}px`}}>
+                <div className="bottom-table-container appearances-container "> 
+                  <div className="bottom-table-body">
+                    {this.props.cast.length > 0 && this.renderCast()}
+                  </div>
                 </div>
               </div>
-            </div>
             }
+            <div className="toggle-container">
+              <button
+                onClick={this.toggleBottom}
+                className={this.state.toggleAppearances ? "filled toggle" : "unfilled toggle"}
+              >
+                Show Ratings
+              </button>
+              <button
+                onClick={this.toggleBottom}
+                className={!this.state.toggleAppearances ? "filled toggle" : "unfilled toggle"}
+              >
+                Show Appearances
+              </button>
+            </div>
           </div>
         }
       </div>
