@@ -64,31 +64,36 @@ class SeriesInfoContainer extends Component {
       unrated: unrated
     };
   }
-  cleanCast(cast) {
+  cleanCast(episodes) {
     let cleanCast = {};
     function compare(a, b) {
-      let aSeason = a.season_number;
-      let bSeason = b.season_number;
+      const aSeason = a.season_number;
+      const bSeason = b.season_number;
       if (aSeason > bSeason) return 1;
       if (aSeason < bSeason) return -1;
-      let aEpiNum = a.episode_number;
-      let bEpiNum = b.episode_number;
+      const aEpiNum = a.episode_number;
+      const bEpiNum = b.episode_number;
       if (aEpiNum > bEpiNum) return 1;
       if (aEpiNum < bEpiNum) return -1;
       return 0;
     }
-    let episodes = cast;
-    episodes.sort(compare);
-    for (let i = 0; i < episodes.length; i++) { // 'cast' is actually a list of episodes
-      let episode = episodes[i];
+    const unratedIds = this.state.unrated.map(ep => ep.id);
+    let eps = [];
+    for (let i = 0; i < episodes.length; i++) {
+      if (unratedIds.indexOf(episodes[i].id) >= 0) continue;
+      eps.push(episodes[i]);
+    }
+    episodes = eps.sort(compare);
+    console.log(episodes);
+    for (let i = 0; i < episodes.length; i++) {
+      const episode = episodes[i];
       for (let j = 0; j < episode.appearances.length; j++) {
-        let ep = episode.appearances[j];
-        let actor = ep.actor.primary_name;
-        let character = ep.characters.slice(2,ep.characters.length-2);
-        // if (character.includes("uncredited") || character.includes("voice)")) break;
+        const ep = episode.appearances[j];
+        const actor = ep.actor.primary_name;
+        const character = ep.characters.slice(2,ep.characters.length-2);
 
         if (!(actor in cleanCast)) { // on first appearance of an actor
-          let zero_arr = new Array(episodes.length).fill(0)
+          let zero_arr = new Array(episodes.length).fill(0);
           cleanCast[actor] = {
             appearances: zero_arr,
             characters: [character]

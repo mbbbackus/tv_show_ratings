@@ -72,27 +72,6 @@ class SeriesInfo extends Component {
             </div>
           </div>
         </div>
-        {/*
-        <div className="bottom-table-cell inline right">
-          <div 
-            className="percent-bar unpopular-dark-red"
-            style={{"width": `${percentBarWidth}px`}}
-          >
-          <div 
-              className="inner-percent-bar unpopular-red" 
-              style={{"width": `${(unPopEpisodeList[i].average_rating / 10) * (percentBarWidth)}px`, "display": "inline-block"}}
-            >
-              <span
-                title={unPopEpisodeList[i].name}
-                className="text-style episode-percent-text"
-              >
-                S{unPopEpisodeList[i].season_number} E{unPopEpisodeList[i].episode_number}, "{unPopEpisodeList[i].name}"
-              </span>
-            </div>
-            <p className="inline text-style out-percent-text">{unPopEpisodeList[i].average_rating}</p>
-          </div>
-        </div>
-        */}
         <div className="bottom-table-cell"></div> 
       </div>
     ));
@@ -103,6 +82,7 @@ class SeriesInfo extends Component {
   }
   renderCast () {
     let cast = this.props.cast;
+    let castLength = cast[0][2].length;
     let classes = "bottom-table-cell inline bg-white ";
     return cast.map((person, i) => (
       <div className="bottom-table-row" key={i}>
