@@ -44,7 +44,11 @@ class Appearance(models.Model):
 	job = models.CharField(max_length=200)
 	characters = models.CharField(max_length=200, blank=True) #convert arrays to json strings
 
+"""
+TODO
+Merge EpisodeRating, EpisodeName, and Episode into one Episode model
 
+"""
 
 
 
