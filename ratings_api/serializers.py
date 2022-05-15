@@ -1,25 +1,5 @@
 from rest_framework import serializers
-from .models import Series, Episode, EpisodeName, EpisodeRating, Actor, Appearance
-
-class EpisodeRatingSerializer(serializers.ModelSerializer):
-	average_rating = serializers.FloatField(read_only=True)
-	num_votes = serializers.IntegerField(read_only=True)
-	class Meta:
-		model = EpisodeRating
-		fields = (
-			'average_rating',
-			'num_votes',
-		)
-
-class EpisodeNameSerializer(serializers.ModelSerializer):
-	primary_name = serializers.CharField(read_only=True)
-	original_name = serializers.CharField(read_only=True)
-	class Meta:
-		model = Episode
-		fields = (
-			'primary_name', 
-			'original_name', 
-		)
+from .models import Series, Episode, Actor, Appearance
 
 class EpisodeSerializer(serializers.ModelSerializer):
 	names = EpisodeNameSerializer(many=True, read_only=True)
@@ -31,8 +11,9 @@ class EpisodeSerializer(serializers.ModelSerializer):
 			'id', 
 			'season_number',
 			'episode_number',
-			'names',
-			'ratings',
+			'primary_name',
+			'average_rating',
+			'num_votes'
 		)
 
 class SeriesSerializer(serializers.ModelSerializer):
@@ -99,7 +80,6 @@ class EpisodeAppearancesSerializer(serializers.ModelSerializer):
 			'episode_number',
 			'names',
 			'appearances'
-
 		)
 
 class SeriesAppearancesSerializer(serializers.ModelSerializer):

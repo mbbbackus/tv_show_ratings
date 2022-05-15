@@ -17,15 +17,8 @@ class Episode(models.Model):
 	series = models.ForeignKey(Series, on_delete=models.CASCADE, related_name='episodes')
 	season_number = models.IntegerField(default=-1)
 	episode_number = models.IntegerField(default=-1)
-
-class EpisodeRating(models.Model):
-	episode = models.ForeignKey(Episode, on_delete=models.CASCADE, related_name='ratings')
 	average_rating = models.FloatField(default=-1.0)
 	num_votes = models.IntegerField(default=-1)
-
-
-class EpisodeName(models.Model):
-	episode = models.ForeignKey(Episode, on_delete=models.CASCADE, related_name='names')
 	primary_name = models.CharField(max_length=200)
 	original_name = models.CharField(max_length=200)
 
